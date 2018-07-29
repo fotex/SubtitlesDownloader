@@ -7,21 +7,25 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #455A64;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BlockedSubtitlesController">
-   <children>
-      <AnchorPane fx:id="emptyInfo_pane" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <ImageView fitHeight="294.0" fitWidth="330.0" layoutX="153.0" layoutY="53.0" opacity="0.1" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/256/ban.png" />
-               </image>
-            </ImageView>
-            <Text fill="WHITE" layoutX="268.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empty">
-               <font>
-                  <Font name="Segoe UI" size="23.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane fx:id="main_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #455A64;"
+            xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="BlockedSubtitlesController">
+    <children>
+        <AnchorPane fx:id="emptyInfo_pane" prefHeight="400.0" prefWidth="600.0">
+            <children>
+                <ImageView fitHeight="294.0" fitWidth="330.0" layoutX="153.0" layoutY="53.0" opacity="0.1"
+                           pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/256/ban.png"/>
+                    </image>
+                </ImageView>
+                <Text fill="WHITE" layoutX="268.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Empty">
+                    <font>
+                        <Font name="Segoe UI" size="23.0"/>
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

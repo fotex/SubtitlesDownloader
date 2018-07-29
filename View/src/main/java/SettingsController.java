@@ -64,5 +64,5 @@ public class SettingsController {
 
         ControllerConnector.getController().initLogin();
         ControllerConnector.getController().updateLoginInfo();
-        }
     }
+}

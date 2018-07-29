@@ -19,8 +19,8 @@ public class Menu {
 
         String name = "";
 
-        for(String key : menuList.keySet()) {
-            if(menuList.get(key) == menu) {
+        for (String key : menuList.keySet()) {
+            if (menuList.get(key) == menu) {
                 menuList.get(key).getStyleClass().clear();
                 menuList.get(key).getStyleClass().add("menu-active");
                 title.setText(key);

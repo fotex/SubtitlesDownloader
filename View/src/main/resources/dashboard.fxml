@@ -9,30 +9,39 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane_dashboard" prefHeight="370.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DashboardController">
-   <children>
-      <Pane fx:id="dragdropPane" onDragDropped="#onDrop" onDragOver="#onDragDrop" prefHeight="328.0" prefWidth="613.0" style="-fx-background-color: #455A64;">
-         <children>
-            <Text fx:id="textInfo" fill="WHITE" layoutX="166.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drag &amp; Drop movies here" textAlignment="CENTER" wrappingWidth="280.82763671875">
-               <font>
-                  <Font name="Segoe UI" size="23.0" />
-               </font>
-            </Text>
-            <ImageView fitHeight="349.0" fitWidth="399.0" layoutX="144.0" layoutY="-8.0" opacity="0.05" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/256/film.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <AnchorPane fx:id="subtitlesView" prefHeight="370.0" prefWidth="613.0" styleClass="custom-scroll" visible="false">
-         <children>
-            <Pane fx:id="subtitlesPane" prefHeight="328.0" prefWidth="613.0" />
-            <Button layoutX="513.0" layoutY="333.0" mnemonicParsing="false" onMouseClicked="#download" styleClass="teal-button" text="Download all" />
-            <Button layoutX="448.0" layoutY="333.0" mnemonicParsing="false" onMouseClicked="#cancel" styleClass="lightblue-button" text="Cancel" />
-            <Text fx:id="limitInfo" fill="WHITE" layoutX="14.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;limit&gt;" wrappingWidth="151.9830722808838" />
-         </children>
-      </AnchorPane>
-      <HBox fx:id="progressBarPane" prefHeight="328.0" prefWidth="613.0" visible="false" />
-   </children>
+<AnchorPane fx:id="pane_dashboard" prefHeight="370.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/9.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="DashboardController">
+    <children>
+        <Pane fx:id="dragdropPane" onDragDropped="#onDrop" onDragOver="#onDragDrop" prefHeight="328.0" prefWidth="613.0"
+              style="-fx-background-color: #455A64;">
+            <children>
+                <Text fx:id="textInfo" fill="WHITE" layoutX="166.0" layoutY="173.0" strokeType="OUTSIDE"
+                      strokeWidth="0.0" text="Drag &amp; Drop movies here" textAlignment="CENTER"
+                      wrappingWidth="280.82763671875">
+                    <font>
+                        <Font name="Segoe UI" size="23.0"/>
+                    </font>
+                </Text>
+                <ImageView fitHeight="349.0" fitWidth="399.0" layoutX="144.0" layoutY="-8.0" opacity="0.05"
+                           pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/256/film.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+        <AnchorPane fx:id="subtitlesView" prefHeight="370.0" prefWidth="613.0" styleClass="custom-scroll"
+                    visible="false">
+            <children>
+                <Pane fx:id="subtitlesPane" prefHeight="328.0" prefWidth="613.0"/>
+                <Button layoutX="513.0" layoutY="333.0" mnemonicParsing="false" onMouseClicked="#download"
+                        styleClass="teal-button" text="Download all"/>
+                <Button layoutX="448.0" layoutY="333.0" mnemonicParsing="false" onMouseClicked="#cancel"
+                        styleClass="lightblue-button" text="Cancel"/>
+                <Text fx:id="limitInfo" fill="WHITE" layoutX="14.0" layoutY="354.0" strokeType="OUTSIDE"
+                      strokeWidth="0.0" text="&lt;limit&gt;" wrappingWidth="151.9830722808838"/>
+            </children>
+        </AnchorPane>
+        <HBox fx:id="progressBarPane" prefHeight="328.0" prefWidth="613.0" visible="false"/>
+    </children>
 </AnchorPane>

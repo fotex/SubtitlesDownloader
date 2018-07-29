@@ -9,92 +9,112 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="520.0" prefWidth="707.0" style="-fx-background-color: #37474F;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
-   <children>
-      <Text fx:id="title" fill="WHITE" layoutX="75.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="510.8828125" layoutY="512.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Powered by OpenSubtitles.org &amp; themoviedb.org" AnchorPane.rightAnchor="8.896484375">
-         <font>
-            <Font name="Segoe UI" size="12.0" />
-         </font>
-      </Text>
-      <AnchorPane layoutX="537.0" layoutY="26.0" prefHeight="33.0" prefWidth="275.0" AnchorPane.rightAnchor="12.0">
-         <children>
-            <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="244.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/64/user-circle.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="loginInfoLabel" fill="WHITE" layoutX="9.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not logged." textAlignment="RIGHT" wrappingWidth="223.38671571016312">
-               <font>
-                  <Font name="Segoe UI" size="12.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="498.0" prefWidth="57.0">
-         <children>
-            <Pane layoutY="22.0" prefHeight="498.0" prefWidth="53.0" style="-fx-background-color: #263238;">
-               <children>
-                  <ImageView fx:id="menu_dashboard" fitHeight="31.0" fitWidth="43.0" layoutX="10.0" layoutY="14.0" onMouseClicked="#onMenuHandle" pickOnBounds="true" preserveRatio="true" styleClass="menu-active">
-                     <image>
-                        <Image url="@images/64/compass2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="menu_subtitle" fitHeight="31.0" fitWidth="31.0" layoutX="13.0" layoutY="109.0" onMouseClicked="#onMenuHandle" opacity="0.2" pickOnBounds="true" preserveRatio="true" styleClass="menu">
-                     <image>
-                        <Image url="@images/64/bars.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="menu_settings" fitHeight="31.0" fitWidth="31.0" layoutX="11.0" layoutY="456.0" onMouseClicked="#onMenuHandle" opacity="0.2" pickOnBounds="true" preserveRatio="true" styleClass="menu">
-                     <image>
-                        <Image url="@images/64/cog.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="menu_blockedsubtitles" fitHeight="31.0" fitWidth="31.0" layoutX="11.0" layoutY="62.0" onMouseClicked="#onMenuHandle" opacity="0.2" pickOnBounds="true" preserveRatio="true" styleClass="menu">
-                     <image>
-                        <Image url="@images/64/ban.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-         </children>
-      </AnchorPane>
-      <BorderPane fx:id="rootPane" layoutX="75.0" layoutY="74.0" prefHeight="413.0" prefWidth="606.0" />
-      <AnchorPane fx:id="sideBar" layoutX="-1.0" layoutY="-2.0" onMouseDragged="#move" onMousePressed="#getPosition" prefHeight="27.0" prefWidth="722.0" style="-fx-background-color: #263238;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <HBox alignment="CENTER" layoutX="689.0" onMouseClicked="#close" prefHeight="27.0" prefWidth="40.0" styleClass="closebutton" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <ImageView fitHeight="21.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/64/times.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <Text fx:id="appName" fill="WHITE" layoutX="13.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtitles Downloader &lt;version&gt;" wrappingWidth="294.533203125" />
-            <HBox alignment="CENTER" layoutX="649.0" prefHeight="27.0" prefWidth="40.0" styleClass="maximizebutton" AnchorPane.rightAnchor="39.0">
-               <children>
-                  <ImageView fitHeight="21.0" fitWidth="12.0" opacity="0.1" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/64/window-maximize.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox fx:id="minimize" alignment="CENTER" layoutX="609.0" onMouseClicked="#minimize" prefHeight="27.0" prefWidth="40.0" AnchorPane.rightAnchor="78.0">
-               <children>
-                  <ImageView fitHeight="21.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/64/window-minimize.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane prefHeight="520.0" prefWidth="707.0" style="-fx-background-color: #37474F;"
+            xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
+    <children>
+        <Text fx:id="title" fill="WHITE" layoutX="75.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Dashboard">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+        <Text fill="WHITE" layoutX="510.8828125" layoutY="512.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Powered by OpenSubtitles.org &amp; themoviedb.org" AnchorPane.rightAnchor="8.896484375">
+            <font>
+                <Font name="Segoe UI" size="12.0"/>
+            </font>
+        </Text>
+        <AnchorPane layoutX="537.0" layoutY="26.0" prefHeight="33.0" prefWidth="275.0" AnchorPane.rightAnchor="12.0">
+            <children>
+                <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="244.0" layoutY="5.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@images/64/user-circle.png"/>
+                    </image>
+                </ImageView>
+                <Text fx:id="loginInfoLabel" fill="WHITE" layoutX="9.0" layoutY="23.0" strokeType="OUTSIDE"
+                      strokeWidth="0.0" text="Not logged." textAlignment="RIGHT" wrappingWidth="223.38671571016312">
+                    <font>
+                        <Font name="Segoe UI" size="12.0"/>
+                    </font>
+                </Text>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="498.0" prefWidth="57.0">
+            <children>
+                <Pane layoutY="22.0" prefHeight="498.0" prefWidth="53.0" style="-fx-background-color: #263238;">
+                    <children>
+                        <ImageView fx:id="menu_dashboard" fitHeight="31.0" fitWidth="43.0" layoutX="10.0" layoutY="14.0"
+                                   onMouseClicked="#onMenuHandle" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="menu-active">
+                            <image>
+                                <Image url="@images/64/compass2.png"/>
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="menu_subtitle" fitHeight="31.0" fitWidth="31.0" layoutX="13.0" layoutY="109.0"
+                                   onMouseClicked="#onMenuHandle" opacity="0.2" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="menu">
+                            <image>
+                                <Image url="@images/64/bars.png"/>
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="menu_settings" fitHeight="31.0" fitWidth="31.0" layoutX="11.0" layoutY="456.0"
+                                   onMouseClicked="#onMenuHandle" opacity="0.2" pickOnBounds="true" preserveRatio="true"
+                                   styleClass="menu">
+                            <image>
+                                <Image url="@images/64/cog.png"/>
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="menu_blockedsubtitles" fitHeight="31.0" fitWidth="31.0" layoutX="11.0"
+                                   layoutY="62.0" onMouseClicked="#onMenuHandle" opacity="0.2" pickOnBounds="true"
+                                   preserveRatio="true" styleClass="menu">
+                            <image>
+                                <Image url="@images/64/ban.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+        <BorderPane fx:id="rootPane" layoutX="75.0" layoutY="74.0" prefHeight="413.0" prefWidth="606.0"/>
+        <AnchorPane fx:id="sideBar" layoutX="-1.0" layoutY="-2.0" onMouseDragged="#move" onMousePressed="#getPosition"
+                    prefHeight="27.0" prefWidth="722.0" style="-fx-background-color: #263238;"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <HBox alignment="CENTER" layoutX="689.0" onMouseClicked="#close" prefHeight="27.0" prefWidth="40.0"
+                      styleClass="closebutton" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <children>
+                        <ImageView fitHeight="21.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/64/times.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+                <Text fx:id="appName" fill="WHITE" layoutX="13.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="Subtitles Downloader &lt;version&gt;" wrappingWidth="294.533203125"/>
+                <HBox alignment="CENTER" layoutX="649.0" prefHeight="27.0" prefWidth="40.0" styleClass="maximizebutton"
+                      AnchorPane.rightAnchor="39.0">
+                    <children>
+                        <ImageView fitHeight="21.0" fitWidth="12.0" opacity="0.1" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@images/64/window-maximize.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+                <HBox fx:id="minimize" alignment="CENTER" layoutX="609.0" onMouseClicked="#minimize" prefHeight="27.0"
+                      prefWidth="40.0" AnchorPane.rightAnchor="78.0">
+                    <children>
+                        <ImageView fitHeight="21.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/64/window-minimize.png"/>
+                            </image>
+                        </ImageView>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

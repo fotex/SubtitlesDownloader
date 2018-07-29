@@ -44,7 +44,7 @@ public class SettingsManager extends Properties {
             JsonWriter jsonWriter = new JsonWriter(new FileWriter(destinationPath));
             jsonWriter.beginObject();
 
-            if(password != null) {
+            if (password != null) {
                 if (!(login.isEmpty() | password.isEmpty())) {
                     jsonWriter.name("login").value(login);
                     instance.setProperty("login", login);
@@ -76,7 +76,7 @@ public class SettingsManager extends Properties {
     }
 
     public static SettingsManager getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             try {
                 instance = new SettingsManager();
 

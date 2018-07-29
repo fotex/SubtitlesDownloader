@@ -2,9 +2,11 @@
 .menu {
     -fx-opacity: 0.2;
 }
+
 .menu:hover {
     -fx-opacity: 1.0;
 }
+
 .menu-active {
     -fx-opacity: 1.0;
 }
@@ -13,6 +15,7 @@
 .closebutton:hover {
     -fx-background-color: #f44336;
 }
+
 .closebutton:pressed {
     -fx-background-color: #d32f2f;
 }
@@ -35,9 +38,11 @@
     -fx-padding: 0px;
     -fx-background-color: #455A64;
 }
+
 .movie-li {
     -fx-background-color: #424242;
 }
+
 .movietitle {
     -fx-font-size: 15px;
     -fx-text-fill: white;
@@ -45,25 +50,30 @@
     -fx-padding: 0px 0px 0px 5px;
     -fx-max-width: 300px;
 }
+
 .moviedesc {
     -fx-font-size: 15px;
     -fx-text-fill: white;
     -fx-padding: 0px 0px 0px 5px;
     -fx-max-width: 300px;
 }
+
 .movieinfo {
     -fx-alignment: center-left;
     -fx-padding: 0px 0px 5px 0px;
 }
+
 .moviebuttons {
     -fx-pref-width: 100px;
     -fx-alignment: center-right;
     -fx-padding: 0px 10px 0px 0px;
     -fx-spacing: 5px;
 }
+
 .moviecell-button {
     -fx-opacity: 0.4;
 }
+
 .moviecell-button:hover {
     -fx-opacity: 1.0;
 }
@@ -73,6 +83,7 @@
     -fx-background-insets: 0;
     -fx-padding: 0;
 }
+
 .subtitlelist .list-view {
     -fx-background-color: transparent;
     -fx-background-insets: 0;
@@ -82,17 +93,16 @@
 /* Custom Scroll */
 
 .custom-scroll .scroll-bar .increment-arrow,
-.custom-scroll .scroll-bar .decrement-arrow{
+.custom-scroll .scroll-bar .decrement-arrow {
     -fx-shape: "";
     -fx-padding: 0.15em 0.0;
 }
 
 .custom-scroll .scroll-bar:vertical .increment-arrow,
-.custom-scroll .scroll-bar:vertical .decrement-arrow{
+.custom-scroll .scroll-bar:vertical .decrement-arrow {
     -fx-shape: "";
     -fx-padding: 0.0 0.15em;
 }
-
 
 .custom-scroll .scroll-bar:horizontal .thumb,
 .custom-scroll .scroll-bar:vertical .thumb {
@@ -108,7 +118,7 @@
     -fx-background-radius: 2.0em;
 }
 
-.custom-scroll .scroll-bar:horizontal .increment-button ,
+.custom-scroll .scroll-bar:horizontal .increment-button,
 .custom-scroll .scroll-bar:horizontal .decrement-button {
     -fx-background-color: transparent;
     -fx-background-radius: 0.0em;
@@ -116,7 +126,7 @@
 
 }
 
-.custom-scroll .scroll-bar:vertical .increment-button ,
+.custom-scroll .scroll-bar:vertical .increment-button,
 .custom-scroll .scroll-bar:vertical .decrement-button {
     -fx-background-color: transparent;
     -fx-background-radius: 0.0em;
@@ -124,20 +134,23 @@
 }
 
 .custom-scroll .scroll-bar:horizontal .track,
-.custom-scroll .scroll-bar:vertical .track{
+.custom-scroll .scroll-bar:vertical .track {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-background-radius: 2.0em;
 }
+
 .custom-scroll .scroll-bar:vertical:focused {
     -fx-background-color: transparent;
 }
-.custom-scroll .scroll-bar{
+
+.custom-scroll .scroll-bar {
     -fx-background-color: transparent;
     -fx-background-radius: 2em;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
+
 .custom-scroll .scroll-bar:vertical .track-background,
 .custom-scroll .scroll-bar:horizontal .track-background {
     -fx-background-color: transparent;
@@ -159,22 +172,20 @@
 
 }
 
-.combo-box .list-cell
-{
+.combo-box .list-cell {
     -fx-background: #3d3d3d;
     -fx-background-color: transparent;
     -fx-text-fill: #FFFFFF;
     -fx-padding: 3 0 2 7;
     -fx-cell-size: 1.66667em;
 }
-.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
-{
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover {
     -fx-background-color: #424242;
     -fx-text-fill: #FFFFFF;
 }
 
-.combo-box-popup .list-view .list-cell
-{
+.combo-box-popup .list-view .list-cell {
     -fx-text-fill: #000000;
 }
 

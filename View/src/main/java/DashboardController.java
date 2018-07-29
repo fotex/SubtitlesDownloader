@@ -58,15 +58,15 @@ public class DashboardController {
 
         subtitlesList.addListener((ListChangeListener<SubtitlesInfo>) c -> {
             while (c.next()) {
-                if(c.wasRemoved()) {
+                if (c.wasRemoved()) {
                     subtitlesManager.remove(c.getRemoved().get(0));
                     updateLimitInfo();
 
-                    if(subtitlesManager.getSize() == 0) {
+                    if (subtitlesManager.getSize() == 0) {
                         cancel();
                     }
 
-                    if(c.getRemoved().get(0).isBlocked()) {
+                    if (c.getRemoved().get(0).isBlocked()) {
                         subtitlesBlocker.block(c.getRemoved().get(0));
                     }
                 }
@@ -92,7 +92,7 @@ public class DashboardController {
 
     @FXML
     private void onDragDrop(DragEvent event) {
-        if(event.getDragboard().hasFiles()) {
+        if (event.getDragboard().hasFiles()) {
             event.acceptTransferModes(TransferMode.ANY);
         }
     }
@@ -161,7 +161,7 @@ public class DashboardController {
                 subtitlesList.setAll(subtitlesManager.getSubtitleList());
                 updateLimitInfo();
 
-                if(subtitlesList.size() == 0) {
+                if (subtitlesList.size() == 0) {
                     textInfo.setText("Subtitles not found.");
                 } else {
                     dragdropPane.setVisible(false);

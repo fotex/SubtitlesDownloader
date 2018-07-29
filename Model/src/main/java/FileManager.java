@@ -13,18 +13,18 @@ public class FileManager {
         File[] dirFiles;
         ArrayList<File> filePaths = new ArrayList<>();
 
-        for(int i = 0; i < files.size(); i++) {
-            if(files.get(i).isDirectory()) {
+        for (int i = 0; i < files.size(); i++) {
+            if (files.get(i).isDirectory()) {
                 dirFiles = files.get(i).listFiles();
 
-                for(int j = 0; j < dirFiles.length; j++) {
-                    if(isMovie(dirFiles[j])) {
+                for (int j = 0; j < dirFiles.length; j++) {
+                    if (isMovie(dirFiles[j])) {
                         filePaths.add(dirFiles[j]);
                     }
                 }
             }
-            if(files.get(i).isFile()) {
-                if(isMovie(files.get(i))) {
+            if (files.get(i).isFile()) {
+                if (isMovie(files.get(i))) {
                     filePaths.add(files.get(i));
                 }
             }
@@ -34,20 +34,20 @@ public class FileManager {
     }
 
     private boolean isMovie(File file) {
-            String[] movieExtensions = new String[]{"mkv","avi","mov","mp4","flv"};
+        String[] movieExtensions = new String[]{"mkv", "avi", "mov", "mp4", "flv"};
 
-            if(Arrays.asList(movieExtensions).contains(FilenameUtils.getExtension(file.getAbsolutePath()))) {
-                return true;
-            }
-            return false;
+        if (Arrays.asList(movieExtensions).contains(FilenameUtils.getExtension(file.getAbsolutePath()))) {
+            return true;
+        }
+        return false;
     }
 
     public static void createConfigFile(File file) {
-        if(!file.getParentFile().exists()) {
+        if (!file.getParentFile().exists()) {
             File directory = new File("config");
             directory.mkdir();
         }
-        if(!file.exists()) {
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {

@@ -45,7 +45,7 @@ public class OSClient {
             loginToken = (String) result.get("token");
             String status = (String) result.get("status");
 
-            if((username.isEmpty() || password.isEmpty()) && status.equals("200 OK")) {
+            if ((username.isEmpty() || password.isEmpty()) && status.equals("200 OK")) {
                 return false;
             } else return status.equals("200 OK");
 
@@ -62,7 +62,7 @@ public class OSClient {
         HashMap<String, Object> secondParameters = new HashMap<>();
         HashMap<String, String> data;
 
-        if(seasonNumber != null && episodeNumber != null) {
+        if (seasonNumber != null && episodeNumber != null) {
             firstParameters.put("season", seasonNumber);
             firstParameters.put("episode", episodeNumber);
         }
@@ -77,16 +77,16 @@ public class OSClient {
 
         Object[] resultData = (Object[]) result.get("data");
 
-        for(int i = 0; i < resultData.length; i++) {
+        for (int i = 0; i < resultData.length; i++) {
             data = (HashMap<String, String>) resultData[i];
-            if(data.get("SubFormat").equals(extension) && !subtitlesBlocker.isSubtitleBlocked(data.get("IDSubtitleFile"))) {
+            if (data.get("SubFormat").equals(extension) && !subtitlesBlocker.isSubtitleBlocked(data.get("IDSubtitleFile"))) {
                 SubtitlesInfo subtitlesInfo = new SubtitlesInfo((HashMap<String, String>) resultData[i]);
                 return subtitlesInfo;
             }
         }
 
         //If subtitles extension don't match then return first available extension.
-        if(resultData.length > 0) {
+        if (resultData.length > 0) {
             return new SubtitlesInfo((HashMap<String, String>) resultData[0]);
         } else {
             throw new OSException("OpenSubtitles: Subtitle not found.");
@@ -126,7 +126,7 @@ public class OSClient {
 
         boolean success = false;
         int count = 0;
-        while(!success && (count++ < MAX_RETRIES)) {
+        while (!success && (count++ < MAX_RETRIES)) {
             try {
                 Thread.sleep(500);
                 result = (HashMap) xmlrpcClient.execute(methodName, parameters);
@@ -137,7 +137,7 @@ public class OSClient {
             }
         }
 
-        if(!success) {
+        if (!success) {
             throw new OSException("OS: Too Many Request or Server is busy");
         }
 

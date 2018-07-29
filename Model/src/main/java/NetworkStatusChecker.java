@@ -3,7 +3,8 @@ import java.net.URLConnection;
 
 public class NetworkStatusChecker {
 
-    public NetworkStatusChecker() { }
+    public NetworkStatusChecker() {
+    }
 
     public static boolean checkStatus() {
         try {
@@ -11,12 +12,10 @@ public class NetworkStatusChecker {
             URLConnection connection = url.openConnection();
             connection.connect();
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
-
 
 
 }

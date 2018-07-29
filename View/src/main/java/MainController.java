@@ -134,7 +134,7 @@ public class MainController {
 
     @FXML
     private void getPosition(MouseEvent event) {
-        if(event.getButton() == MouseButton.PRIMARY) {
+        if (event.getButton() == MouseButton.PRIMARY) {
             positionX = event.getSceneX();
             positionY = event.getSceneY();
         }

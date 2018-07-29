@@ -23,7 +23,7 @@ public class SplashScreenController {
 
     public void initialize() {
         Thread thread = new Thread(() -> {
-            if(!NetworkStatusChecker.checkStatus()) {
+            if (!NetworkStatusChecker.checkStatus()) {
                 Platform.runLater(() -> loadingInfo.setText("No internet connection..."));
                 waitForConnection();
             } else {
@@ -73,7 +73,7 @@ public class SplashScreenController {
         timer.schedule(new TimerTask() {
             public void run() {
                 loadingInfo.setText("Waiting for internet connection...");
-                if(NetworkStatusChecker.checkStatus()) {
+                if (NetworkStatusChecker.checkStatus()) {
                     initialize();
                     timer.cancel();
                 }

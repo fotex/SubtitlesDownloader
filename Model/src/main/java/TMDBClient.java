@@ -19,10 +19,10 @@ public class TMDBClient {
         JsonArray jsonArray = jsonObject.getAsJsonArray("results");
         JsonObject jsonResult = null;
 
-        if(jsonArray.size() > 0) {
+        if (jsonArray.size() > 0) {
             jsonResult = jsonArray.get(0).getAsJsonObject();
 
-            if(isTVShow) {
+            if (isTVShow) {
                 movie.setMovieName(jsonResult.get("original_name").getAsString());
             } else {
                 movie.setMovieName(jsonResult.get("title").getAsString());
@@ -43,7 +43,7 @@ public class TMDBClient {
         JsonObject jsonObject = tmdbApi.query(id, false, isTVShow);
         JsonObject jsonArray = jsonObject.getAsJsonObject("external_ids");
 
-        if(jsonArray.size() > 0) {
+        if (jsonArray.size() > 0) {
             return jsonArray.get("imdb_id").getAsString().replaceAll("tt", "");
         }
 

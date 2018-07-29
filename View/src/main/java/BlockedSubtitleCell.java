@@ -14,8 +14,8 @@ final class BlockedSubtitleCell extends ListCell<SubtitlesInfo> {
 
         ImageView img_deletebutton = new ImageView("images/64/trash-alt2.png");
 
-        img_deletebutton.setFitHeight(img_deletebutton.getImage().getHeight()/2);
-        img_deletebutton.setFitWidth(img_deletebutton.getImage().getWidth()/2);
+        img_deletebutton.setFitHeight(img_deletebutton.getImage().getHeight() / 2);
+        img_deletebutton.setFitWidth(img_deletebutton.getImage().getWidth() / 2);
         img_deletebutton.setPickOnBounds(true);
         img_deletebutton.getStyleClass().add("moviecell-button");
 
@@ -46,7 +46,7 @@ final class BlockedSubtitleCell extends ListCell<SubtitlesInfo> {
 
             String desc = item.getLanguage();
 
-            if(item.getSeason() != null) {
+            if (item.getSeason() != null) {
                 desc = desc + " - S" + item.getSeason() + "E" + item.getEpisode();
             }
 

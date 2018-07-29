@@ -30,13 +30,13 @@ final class SubtitleCell extends ListCell<SubtitlesInfo> {
         ImageView img_deletebutton = new ImageView("images/64/trash-alt2.png");
         ImageView img_blockbutton = new ImageView("images/64/ban.png");
 
-        img_deletebutton.setFitHeight(img_deletebutton.getImage().getHeight()/2);
-        img_deletebutton.setFitWidth(img_deletebutton.getImage().getWidth()/2);
+        img_deletebutton.setFitHeight(img_deletebutton.getImage().getHeight() / 2);
+        img_deletebutton.setFitWidth(img_deletebutton.getImage().getWidth() / 2);
         img_deletebutton.setPickOnBounds(true);
         img_deletebutton.getStyleClass().add("moviecell-button");
 
-        img_blockbutton.setFitHeight(img_blockbutton.getImage().getHeight()/2);
-        img_blockbutton.setFitWidth(img_blockbutton.getImage().getWidth()/2);
+        img_blockbutton.setFitHeight(img_blockbutton.getImage().getHeight() / 2);
+        img_blockbutton.setFitWidth(img_blockbutton.getImage().getWidth() / 2);
         img_blockbutton.setPickOnBounds(true);
         img_blockbutton.getStyleClass().add("moviecell-button");
 
@@ -72,7 +72,7 @@ final class SubtitleCell extends ListCell<SubtitlesInfo> {
 
             String desc = item.getLanguage();
 
-            if(item.getTmdbMovie().isTVShow()) {
+            if (item.getTmdbMovie().isTVShow()) {
                 desc = desc + " - S" + item.getSeason() + "E" + item.getEpisode();
             }
 
@@ -81,8 +81,8 @@ final class SubtitleCell extends ListCell<SubtitlesInfo> {
             movieDesc.setText(desc);
 
             img_movieicon.setImage(new Image(POSTER_URL + item.getTmdbMovie().getPosterImagePath()));
-            img_movieicon.setFitWidth(img_movieicon.getImage().getWidth()/4);
-            img_movieicon.setFitHeight(img_movieicon.getImage().getHeight()/4);
+            img_movieicon.setFitWidth(img_movieicon.getImage().getWidth() / 4);
+            img_movieicon.setFitHeight(img_movieicon.getImage().getHeight() / 4);
 
             movieTitle.getStyleClass().add("movietitle");
             movieDesc.getStyleClass().add("moviedesc");

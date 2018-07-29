@@ -23,7 +23,7 @@ public class TMDBApi {
 
         URL url;
 
-        if(isSearchQuery) {
+        if (isSearchQuery) {
             url = buildSearchUrl(query, isTVShow);
         } else {
             url = buildUrl(query, isTVShow);
@@ -44,7 +44,7 @@ public class TMDBApi {
         urlBuilder.append(API_URL);
         urlBuilder.append(SEARCH);
 
-        if(isTVShow) {
+        if (isTVShow) {
             urlBuilder.append(TVSHOW);
         } else {
             urlBuilder.append(MOVIE);
@@ -67,7 +67,7 @@ public class TMDBApi {
 
         urlBuilder.append(API_URL);
 
-        if(isTVShow) {
+        if (isTVShow) {
             urlBuilder.append(TVSHOW);
         } else {
             urlBuilder.append(MOVIE);

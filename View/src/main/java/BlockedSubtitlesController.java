@@ -32,11 +32,11 @@ public class BlockedSubtitlesController {
 
         subtitlesList.addListener((ListChangeListener<SubtitlesInfo>) c -> {
             while (c.next()) {
-                if(c.wasRemoved()) {
+                if (c.wasRemoved()) {
 
                     subtitlesBlocker.unblock(c.getRemoved().get(0).getSubtitlesId());
 
-                    if(subtitlesList.size() == 0) {
+                    if (subtitlesList.size() == 0) {
                         emptyInfo_pane.setVisible(true);
                     }
                 }
@@ -49,7 +49,7 @@ public class BlockedSubtitlesController {
             Platform.runLater(() -> {
                 subtitlesList.setAll(blockedSubtitles);
 
-                if(subtitlesList.size() == 0) {
+                if (subtitlesList.size() == 0) {
                     emptyInfo_pane.setVisible(true);
                 } else {
                     main_pane.getChildren().add(subtitlesListView);

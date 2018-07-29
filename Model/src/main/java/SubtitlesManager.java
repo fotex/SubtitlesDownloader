@@ -17,7 +17,7 @@ public class SubtitlesManager {
     private ArrayList<SubtitlesInfo> subtitleList = new ArrayList<>();
 
     public void download() {
-        for(int i = 0; i < subtitleList.size(); i++) {
+        for (int i = 0; i < subtitleList.size(); i++) {
             try {
                 downloadSubtitle(subtitleList.get(i));
                 convertToUTF8(subtitleList.get(i));
@@ -48,9 +48,9 @@ public class SubtitlesManager {
     }
 
     private void moveSubtitle(SubtitlesInfo subtitlesInfo) {
-         Path source = Paths.get(TEMP_SUBTITLE_DIR);
-         Path destination = Paths.get(subtitlesInfo.getDestinationPath() + separator +
-                 subtitlesInfo.getFileName() + "." + subtitlesInfo.getLanguageFormat() + "." + subtitlesInfo.getSubtitleFormat());
+        Path source = Paths.get(TEMP_SUBTITLE_DIR);
+        Path destination = Paths.get(subtitlesInfo.getDestinationPath() + separator +
+                subtitlesInfo.getFileName() + "." + subtitlesInfo.getLanguageFormat() + "." + subtitlesInfo.getSubtitleFormat());
 
         try {
             Files.deleteIfExists(destination);

@@ -175,8 +175,8 @@ public class LanguageCodes {
     }
 
     public String getISO639_2(String languageName) {
-        for(String key : alpha2_languages.keySet()) {
-            if(alpha2_languages.get(key).equals(languageName)) {
+        for (String key : alpha2_languages.keySet()) {
+            if (alpha2_languages.get(key).equals(languageName)) {
                 return key;
             }
         }
@@ -190,8 +190,8 @@ public class LanguageCodes {
     }
 
     public String getISO639_3(String languageName) {
-        for(String key : alpha3_b_languages.keySet()) {
-            if(alpha3_b_languages.get(key).equals(languageName)) {
+        for (String key : alpha3_b_languages.keySet()) {
+            if (alpha3_b_languages.get(key).equals(languageName)) {
                 return key;
             }
         }

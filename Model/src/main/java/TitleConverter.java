@@ -37,7 +37,7 @@ public class TitleConverter {
 
         Pattern r = Pattern.compile(nameWithSeason);
         Matcher m = r.matcher(rawName);
-        if (m.find( )) {
+        if (m.find()) {
             this.isTVShow = true;
             this.rawName = m.group();
             removeMark();
@@ -53,7 +53,7 @@ public class TitleConverter {
 
         Pattern r1 = Pattern.compile(pattern);
         Matcher m1 = r1.matcher(rawName);
-        if (m1.find( )) {
+        if (m1.find()) {
             this.rawName = this.rawName.replaceAll(m1.group(), "");
         }
 

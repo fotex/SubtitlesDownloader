@@ -6,7 +6,8 @@ public class TMDBMovieInfo {
 
     private boolean isTVShow;
 
-    public TMDBMovieInfo() {}
+    public TMDBMovieInfo() {
+    }
 
     public String getMovieName() {
         return movieName;

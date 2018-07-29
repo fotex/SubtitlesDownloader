@@ -26,6 +26,7 @@ public class SubtitleOffsetController {
 
     private String subtitlePath;
     private CustomProgressBar customProgressBar;
+
     public void initialize() {
         customProgressBar = new CustomProgressBar(progressBarPane);
     }
@@ -42,7 +43,7 @@ public class SubtitleOffsetController {
         fileChooser.getExtensionFilters().add(fileExtensions);
 
         File subtitleFile = fileChooser.showOpenDialog(status.getScene().getWindow());
-        if(subtitleFile != null) {
+        if (subtitleFile != null) {
             subtitlePath = subtitleFile.getAbsolutePath();
             subtitleName.setText(subtitleFile.getName());
             status.setText("Loaded subtitle.");
@@ -52,32 +53,32 @@ public class SubtitleOffsetController {
 
     @FXML
     public void save() {
-            Thread thread = new Thread(() -> {
+        Thread thread = new Thread(() -> {
 
-                Platform.runLater(() -> customProgressBar.start());
+            Platform.runLater(() -> customProgressBar.start());
 
-                String offsetPattern = "-{0,1}([0-9]+?)\\.{1}([0-9]{1,3})";
-                boolean matcher = Pattern.matches(offsetPattern, timeShift.getText());
+            String offsetPattern = "-{0,1}([0-9]+?)\\.{1}([0-9]{1,3})";
+            boolean matcher = Pattern.matches(offsetPattern, timeShift.getText());
 
-                if(matcher) {
-                    String offsetstr = String.format("%.3f", Double.parseDouble(timeShift.getText()));
-                    double offset = Double.parseDouble(offsetstr);
-                    SubtitlesSyncer subtitlesSyncer = new SubtitlesSyncer(subtitlePath);
-                    try {
-                        subtitlesSyncer.srtOffset(offset);
-                        subtitlesSyncer.save();
-                        status.setText("Operation successfully completed.");
-                    } catch (IOException e) {
-                        status.setText("Error.");
-                    }
-                } else {
-                    status.setText("Not supported offset value.");
+            if (matcher) {
+                String offsetstr = String.format("%.3f", Double.parseDouble(timeShift.getText()));
+                double offset = Double.parseDouble(offsetstr);
+                SubtitlesSyncer subtitlesSyncer = new SubtitlesSyncer(subtitlePath);
+                try {
+                    subtitlesSyncer.srtOffset(offset);
+                    subtitlesSyncer.save();
+                    status.setText("Operation successfully completed.");
+                } catch (IOException e) {
+                    status.setText("Error.");
                 }
+            } else {
+                status.setText("Not supported offset value.");
+            }
 
-                Platform.runLater(() -> customProgressBar.stop());
+            Platform.runLater(() -> customProgressBar.stop());
 
-            });
-            thread.start();
+        });
+        thread.start();
     }
 
     @FXML

@@ -23,7 +23,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-         primaryStage.show();
+        primaryStage.show();
 
         //Center stage
         primaryStage.setX((primScreenBounds.getWidth() - primaryStage.getWidth()) / 2);

@@ -23,7 +23,7 @@ public class SubtitlesBlocker {
         jsonParser = new JsonParser();
         file = new File(BLOCKED_SUBTITLES);
 
-        if(!file.exists()) {
+        if (!file.exists()) {
             FileManager.createConfigFile(file);
         }
     }
@@ -56,9 +56,9 @@ public class SubtitlesBlocker {
             root = jsonParser.parse(new FileReader(BLOCKED_SUBTITLES));
 
             JsonArray jsonArray = root.getAsJsonArray();
-            for(int i = 0; i < jsonArray.size(); i++) {
+            for (int i = 0; i < jsonArray.size(); i++) {
                 JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
-                if(jsonObject.get("subid").getAsString().equals(id)) {
+                if (jsonObject.get("subid").getAsString().equals(id)) {
                     jsonArray.remove(i);
                 }
             }
@@ -95,7 +95,7 @@ public class SubtitlesBlocker {
                 subtitlesInfo.setBlocked(true);
                 subtitlesInfo.setFileName(jsonObject.get("name").getAsString());
 
-                if(jsonObject.get("season").toString().equals("null")) {
+                if (jsonObject.get("season").toString().equals("null")) {
                     subtitlesInfo.setSeason(null);
                     subtitlesInfo.setEpisode(null);
                 } else {
@@ -111,7 +111,6 @@ public class SubtitlesBlocker {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
 
 
         return blockedSubtitlesList;
