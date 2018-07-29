@@ -1,11 +1,11 @@
 # SubtitlesDownloader
 SubtitlesDownloader is a free and opensource application for download subtitles.
 
-##Download
+## Download
 
 
 
-##Releases
+## Releases
 ```
 Release alpha_1.0.7
 - Added subtitle block support.
@@ -14,14 +14,14 @@ Release alpha_1.0.7
 - Added subtitles offset support (only srt extension)
 ```
 
-##Features 
+## Features 
 - Drag and Drop a movie file to automatic search subtitle,
 - SRT subtitles shift support,
 - Block subtitle with translation mistakes and search new one,
 - OpenSubtitles logging support,
 - Clean and intuitive GUI.
 
-##Movie names
+## Movie names
 
 The subtitles search is based on file names. In future a movie hash searching will be added.<br>
 e.g.
@@ -44,7 +44,7 @@ or
 ```
 e.g. "S01E01.Westworld" is not acceptable.<br><br>
 
-##GUI
+## GUI
 
 GUI is not responsive yet.
 
