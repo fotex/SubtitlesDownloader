@@ -2,7 +2,7 @@
 SubtitlesDownloader is a free and opensource application for download subtitles.
 
 ## Download
-
+Download latest release [here](https://github.com/fotex/SubtitlesDownloader/releases)
 
 
 ## Releases
