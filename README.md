@@ -7,6 +7,9 @@ Download latest release [here](https://github.com/fotex/SubtitlesDownloader/rele
 
 ## Releases
 ```
+Release alpha_1.0.8
+- Added extended subtitle search support.
+- Bug fixes.
 Release alpha_1.0.7
 - Added subtitle block support.
 - Added Drag & Drop support
@@ -34,6 +37,14 @@ sudo update-alternatives --config java
 Select JDK8.
 
 If you see SSL error then you should update the cacerts keystore file.
+
+```
+cp -i cacerts /etc/ssl/certs/java/cacerts 
+```
+Run application
+```
+java -jar SubtitleDownloader.jar
+```
 
 ## Movie names
 
