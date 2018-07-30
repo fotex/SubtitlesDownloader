@@ -21,6 +21,20 @@ Release alpha_1.0.7
 - OpenSubtitles logging support,
 - Clean and intuitive GUI.
 
+## Linux Installation
+Download the latest jar version from releases. <br>
+Type the following commands:
+```
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+
+sudo update-alternatives --config java
+```
+Select JDK8.
+
+If you see SSL error then you should update the cacerts keystore file.
+
 ## Movie names
 
 The subtitles search is based on file names. In future a movie hash searching will be added.<br>
