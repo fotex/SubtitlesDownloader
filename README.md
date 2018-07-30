@@ -8,7 +8,7 @@ Download latest release [here](https://github.com/fotex/SubtitlesDownloader/rele
 ## Releases
 ```
 Release alpha_1.0.8
-- Added extended subtitle search support.
+- Added option to search extended version of subtitles.
 - Bug fixes.
 Release alpha_1.0.7
 - Added subtitle block support.
