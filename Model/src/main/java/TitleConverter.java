@@ -4,10 +4,10 @@ import java.util.regex.Pattern;
 public class TitleConverter {
 
     private String rawName;
-
     private String episode;
     private String season;
     private String convertedName;
+
     private boolean isTVShow;
 
     public TitleConverter(String name) {
@@ -30,6 +30,7 @@ public class TitleConverter {
 
     /**
      * This method check if the title contains S00E00 mark, if yes this title is tv series.
+     * Also this method calls removeMark method to remove S00E00 pattern from title.
      */
 
     private void checkTVShow() {
@@ -40,19 +41,18 @@ public class TitleConverter {
         if (m.find()) {
             this.isTVShow = true;
             this.rawName = m.group();
-            removeMark();
+            removeMark("S\\d\\dE\\d\\d");
         }
     }
 
     /**
-     * This method remove S00E00 mark from the title.
+     * This method remove @pattern from the title.
      * Also this method is setting a season and episode variables.
      */
-    private void removeMark() {
-        String pattern = "S\\d\\dE\\d\\d";
-
+    private void removeMark(String pattern) {
         Pattern r1 = Pattern.compile(pattern);
         Matcher m1 = r1.matcher(rawName);
+
         if (m1.find()) {
             this.rawName = this.rawName.replaceAll(m1.group(), "");
         }
@@ -73,7 +73,7 @@ public class TitleConverter {
         return convertedName;
     }
 
-    public Boolean isTVShow() {
+    public boolean isTVShow() {
         return isTVShow;
     }
 }

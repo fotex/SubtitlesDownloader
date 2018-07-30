@@ -25,8 +25,9 @@ public class SettingsManagerTest {
         String password = "password";
         String language = "English";
         String extension = "srt";
+        String extended = "false";
 
-        SettingsManager.getInstance().saveSettings(login, password, language, extension);
+        SettingsManager.getInstance().saveSettings(login, password, language, extension, extended);
 
         assertEquals(true, SettingsManager.getInstance().getProperty("login").equals(login));
         assertEquals(false, SettingsManager.getInstance().getProperty("password").equals(password));

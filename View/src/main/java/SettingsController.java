@@ -1,4 +1,5 @@
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -13,6 +14,9 @@ public class SettingsController {
 
     @FXML
     private ComboBox selectBox_language, selectBox_extension;
+
+    @FXML
+    private CheckBox checkBox_extended;
 
     private boolean passwordChanged = false;
 
@@ -33,6 +37,8 @@ public class SettingsController {
 
         selectBox_extension.getSelectionModel().select(SettingsManager.getInstance().getProperty("extension"));
         selectBox_extension.getItems().addAll(SettingsManager.getInstance().getAllExtensions());
+
+        checkBox_extended.setSelected(Boolean.valueOf(SettingsManager.getInstance().getProperty("extended")));
     }
 
     @FXML
@@ -49,6 +55,7 @@ public class SettingsController {
 
         String login = loginField.getText();
         String password;
+        String extended;
 
         if (passwordChanged) {
             password = passwordField.getText();
@@ -56,7 +63,13 @@ public class SettingsController {
             password = null;
         }
 
-        SettingsManager.getInstance().saveSettings(login, password, language, extension);
+        if (checkBox_extended.isSelected()) {
+            extended = "true";
+        } else {
+            extended = "false";
+        }
+
+        SettingsManager.getInstance().saveSettings(login, password, language, extension, extended);
 
         OSClient osClient = new OSClient();
         osClient.setLoginToken(SettingsManager.getInstance().getProperty("loginToken"));

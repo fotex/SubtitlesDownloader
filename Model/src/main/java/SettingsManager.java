@@ -19,11 +19,12 @@ public class SettingsManager extends Properties {
     private final String destinationPath = "config" + FileManager.separator + "settings.json";
 
     protected final Logger log = Logger.getLogger(getClass().getName());
+
     private final String DEFAULT_LOGIN = "";
     private final String DEFAULT_PASSWORD = "";
-
     private final String DEFAULT_LANGUAGE = "eng";
     private final String DEFAULT_EXTENSION = "srt";
+    private final String DEFAULT_EXDENDEDVERSION = "false";
 
     private LanguageCodes languageCodes;
 
@@ -35,7 +36,7 @@ public class SettingsManager extends Properties {
         extensions.add("sub");
     }
 
-    public void saveSettings(String login, String password, String language, String extension) {
+    public void saveSettings(String login, String password, String language, String extension, String extended) {
         try {
             File file = new File(destinationPath);
 
@@ -67,6 +68,8 @@ public class SettingsManager extends Properties {
             instance.setProperty("language", languageCodes.getISO639_3(language));
             jsonWriter.name("extension").value(extension);
             instance.setProperty("extension", extension);
+            jsonWriter.name("extended").value(extended);
+            instance.setProperty("extended", extended);
 
             jsonWriter.endObject();
             jsonWriter.close();
@@ -90,9 +93,11 @@ public class SettingsManager extends Properties {
                 String password = jsonObject.get("password").getAsString();
                 String language = jsonObject.get("language").getAsString();
                 String extension = jsonObject.get("extension").getAsString();
+                String extended = jsonObject.get("extended").getAsString();
 
                 instance.setProperty("login", login);
                 instance.setProperty("password", password);
+                instance.setProperty("extended", extended);
 
                 if (instance.languageCodes.containsKey(language)) {
                     instance.setProperty("language", language);
@@ -113,6 +118,7 @@ public class SettingsManager extends Properties {
                 instance.setProperty("password", instance.DEFAULT_PASSWORD);
                 instance.setProperty("language", instance.DEFAULT_LANGUAGE);
                 instance.setProperty("extension", instance.DEFAULT_EXTENSION);
+                instance.setProperty("extended", instance.DEFAULT_EXDENDEDVERSION);
             }
         }
         return instance;

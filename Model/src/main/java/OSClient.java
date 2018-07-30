@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class OSClient {
     private final String API_URL = "https://api.opensubtitles.org:443/xml-rpc";
@@ -79,9 +81,19 @@ public class OSClient {
 
         for (int i = 0; i < resultData.length; i++) {
             data = (HashMap<String, String>) resultData[i];
-            if (data.get("SubFormat").equals(extension) && !subtitlesBlocker.isSubtitleBlocked(data.get("IDSubtitleFile"))) {
+            if (data.get("SubFormat").equals(extension) &&
+                    !subtitlesBlocker.isSubtitleBlocked(data.get("IDSubtitleFile"))) {
                 SubtitlesInfo subtitlesInfo = new SubtitlesInfo((HashMap<String, String>) resultData[i]);
-                return subtitlesInfo;
+
+                if(extended) {
+                    if(searchExtended(subtitlesInfo.getSubtitleFileName())) {
+                        subtitlesInfo.setExtended(true);
+                        return subtitlesInfo;
+                    }
+                } else {
+                    return subtitlesInfo;
+                }
+
             }
         }
 
@@ -121,7 +133,6 @@ public class OSClient {
     }
 
     public HashMap<?, ?> execute(String methodName, Object[] parameters) throws OSException {
-
         HashMap<?, ?> result = new HashMap<>();
 
         boolean success = false;
@@ -142,6 +153,13 @@ public class OSClient {
         }
 
         return result;
+    }
+
+    private boolean searchExtended(String subtitleName) {
+        String nameWithSeason = "(Extended|extended|EXTENDED)";
+        Pattern r = Pattern.compile(nameWithSeason);
+        Matcher m = r.matcher(subtitleName);
+        return m.find();
     }
 
     public void setLoginToken(String loginToken) {

@@ -76,6 +76,10 @@ final class SubtitleCell extends ListCell<SubtitlesInfo> {
                 desc = desc + " - S" + item.getSeason() + "E" + item.getEpisode();
             }
 
+            if(item.isExtended()) {
+                desc = desc + " *EXTENDED*";
+            }
+
             desc = desc + " - format: " + item.getSubtitleFormat();
 
             movieDesc.setText(desc);

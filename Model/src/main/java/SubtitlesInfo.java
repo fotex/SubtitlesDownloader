@@ -2,6 +2,8 @@ import java.util.HashMap;
 
 public class SubtitlesInfo {
 
+    private TMDBMovieInfo tmdbMovie;
+
     private String language;
     private String downloadsCount;
     private String downloadURL;
@@ -11,13 +13,14 @@ public class SubtitlesInfo {
     private String languageFormat;
     private String subtitleEncoding;
     private String subtitlesId;
+    private String subtitleFileName;
 
-    private boolean blocked;
     private String season;
     private String episode;
     private String fileName;
 
-    private TMDBMovieInfo tmdbMovie;
+    private boolean isExtended;
+    private boolean isBlocked;
 
     SubtitlesInfo(HashMap<String, String> data) {
         language = data.get("LanguageName");
@@ -27,7 +30,9 @@ public class SubtitlesInfo {
         subtitleFormat = data.get("SubFormat");
         subtitleEncoding = data.get("SubEncoding");
         subtitlesId = data.get("IDSubtitleFile");
-        blocked = false;
+        subtitleFileName = data.get("SubFileName");
+        isBlocked = false;
+        isExtended = false;
     }
 
     public void setDestinationPath(String destinationPath) {
@@ -107,11 +112,11 @@ public class SubtitlesInfo {
     }
 
     public boolean isBlocked() {
-        return blocked;
+        return isBlocked;
     }
 
-    public void setBlocked(boolean blocked) {
-        this.blocked = blocked;
+    public void setBlocked(boolean isBlocked) {
+        this.isBlocked = isBlocked;
     }
 
     public void setLanguage(String language) {
@@ -120,5 +125,17 @@ public class SubtitlesInfo {
 
     public void setSubtitleFormat(String subtitleFormat) {
         this.subtitleFormat = subtitleFormat;
+    }
+
+    public boolean isExtended() {
+        return isExtended;
+    }
+
+    public void setExtended(boolean extended) {
+        isExtended = extended;
+    }
+
+    public String getSubtitleFileName() {
+        return subtitleFileName;
     }
 }

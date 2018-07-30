@@ -124,10 +124,12 @@ public class DashboardController {
             for (int i = 0; i < moviesPaths.size(); i++) {
                 SubtitlesInfo subtitlesInfo;
                 TMDBMovieInfo tmdbMovie;
+
                 try {
                     String movieName = FilenameUtils.removeExtension(moviesPaths.get(i).getName());
 
                     titleConverter = new TitleConverter(movieName);
+
                     titleConverter.convert();
 
                     tmdbMovie = tmdbClient.search(titleConverter.getConvertedName(), titleConverter.isTVShow());
@@ -138,7 +140,7 @@ public class DashboardController {
                             titleConverter.getEpisode(),
                             SettingsManager.getInstance().getProperty("language"),
                             SettingsManager.getInstance().getProperty("extension"),
-                            false);
+                            Boolean.valueOf(SettingsManager.getInstance().getProperty("extended")));
 
                     subtitlesInfo.setTmdbMovie(tmdbMovie);
                     subtitlesInfo.setSeason(titleConverter.getSeason());
