@@ -55,4 +55,11 @@ public class FileManager {
             }
         }
     }
+
+    public static void createTempDir() {
+        File directory = new File("tmp");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+    }
 }

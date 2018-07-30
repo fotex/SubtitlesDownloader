@@ -44,7 +44,7 @@ public class MainController {
     private double positionY;
 
     private final String APP_NAME = "Subtitles Downloader";
-    private final String APP_VERSION = "1.0.7";
+    private final String APP_VERSION = "1.0.8_alpha";
 
     public void initialize() {
         appName.setText(APP_NAME + " " + APP_VERSION);

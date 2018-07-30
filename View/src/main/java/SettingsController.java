@@ -71,11 +71,13 @@ public class SettingsController {
 
         SettingsManager.getInstance().saveSettings(login, password, language, extension, extended);
 
-        OSClient osClient = new OSClient();
-        osClient.setLoginToken(SettingsManager.getInstance().getProperty("loginToken"));
-        osClient.logout();
+        if(passwordChanged) {
+            OSClient osClient = new OSClient();
+            osClient.setLoginToken(SettingsManager.getInstance().getProperty("loginToken"));
+            osClient.logout();
 
-        ControllerConnector.getController().initLogin();
-        ControllerConnector.getController().updateLoginInfo();
+            ControllerConnector.getController().initLogin();
+            ControllerConnector.getController().updateLoginInfo();
+        }
     }
 }

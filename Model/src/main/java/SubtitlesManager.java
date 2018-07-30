@@ -9,12 +9,15 @@ import java.util.ArrayList;
 
 public class SubtitlesManager {
 
-    private static final String separator = System.getProperty("file.separator");
-    public static final String TEMP_SUBTITLE_DIR = ".." + separator + "tmp" + separator + "subtitle.txt";
+    public static final String TEMP_SUBTITLE_DIR = "tmp" + FileManager.separator + "subtitle.txt";
 
     public static final int MAX_SUBTITLES = 15;
 
     private ArrayList<SubtitlesInfo> subtitleList = new ArrayList<>();
+
+    public SubtitlesManager() {
+        FileManager.createTempDir();
+    }
 
     public void download() {
         for (int i = 0; i < subtitleList.size(); i++) {
@@ -49,7 +52,7 @@ public class SubtitlesManager {
 
     private void moveSubtitle(SubtitlesInfo subtitlesInfo) {
         Path source = Paths.get(TEMP_SUBTITLE_DIR);
-        Path destination = Paths.get(subtitlesInfo.getDestinationPath() + separator +
+        Path destination = Paths.get(subtitlesInfo.getDestinationPath() + FileManager.separator +
                 subtitlesInfo.getFileName() + "." + subtitlesInfo.getLanguageFormat() + "." + subtitlesInfo.getSubtitleFormat());
 
         try {
