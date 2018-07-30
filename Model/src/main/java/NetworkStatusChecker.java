@@ -1,5 +1,5 @@
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.IOException;
+import java.net.*;
 
 public class NetworkStatusChecker {
 
@@ -7,15 +7,15 @@ public class NetworkStatusChecker {
     }
 
     public static boolean checkStatus() {
-        try {
-            URL url = new URL("https://google.com/");
-            URLConnection connection = url.openConnection();
-            connection.connect();
+        try(Socket socket = new Socket())
+        {
+            int port = 80;
+            InetSocketAddress socketAddress = new InetSocketAddress("google.com", port);
+            socket.connect(socketAddress, 3000);
+
             return true;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return false;
         }
     }
-
-
 }

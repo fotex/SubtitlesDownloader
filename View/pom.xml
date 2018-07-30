@@ -37,6 +37,9 @@
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.8.3</version>
+                <configuration>
+                    <mainClass>Main</mainClass>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -85,6 +88,5 @@
     <groupId>pl.fotex.opensubtitlesview</groupId>
     <artifactId>view</artifactId>
     <version>1.0-SNAPSHOT</version>
-
 
 </project>
