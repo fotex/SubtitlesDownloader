@@ -2,8 +2,7 @@ public class ControllerConnector {
 
     private static MainController controller = null;
 
-    private ControllerConnector() {
-    }
+    private ControllerConnector() { }
 
     public static void setConnector(MainController mainController) {
         controller = mainController;

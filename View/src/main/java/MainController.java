@@ -1,7 +1,6 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -13,15 +12,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainController {
-
-    private Menu menu;
-    private Parent root;
 
     @FXML
     private Text title, loginInfoLabel, appName;
@@ -38,13 +34,18 @@ public class MainController {
     @FXML
     private AnchorPane sideBar;
 
+    private Menu menu;
+    private Parent root;
+
     private OSClient osClient;
+
+    private final String APP_NAME = "Subtitles Downloader";
+    private final String APP_VERSION = "1.0.8_alpha";
 
     private double positionX;
     private double positionY;
 
-    private final String APP_NAME = "Subtitles Downloader";
-    private final String APP_VERSION = "1.0.8_alpha";
+    protected final Logger log = Logger.getLogger(getClass().getName());
 
     public void initialize() {
         appName.setText(APP_NAME + " " + APP_VERSION);
@@ -55,7 +56,7 @@ public class MainController {
         updateLoginInfo();
         initSessionChecker();
 
-        menu = new Menu(title, rootPane);
+        menu = new Menu(title);
         menu.add("Dashboard", menu_dashboard);
         menu.add("Blocked subtitles", menu_blockedsubtitles);
         menu.add("Subtitle offset", menu_subtitle);
@@ -64,7 +65,7 @@ public class MainController {
         try {
             root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
         } catch (IOException e) {
-            // test
+            log.log(Level.INFO, "Cannot load dashboard");
         }
 
         rootPane.setLeft(root);
@@ -92,17 +93,7 @@ public class MainController {
 
             rootPane.setLeft(root);
         } catch (IOException e) {
-            //
-        }
-    }
-
-    public void updateLoginInfo() {
-        if (osClient.checkSession() &&
-                !SettingsManager.getInstance().getProperty("login").isEmpty() &&
-                SettingsManager.getInstance().getProperty("isLoggedAsUser").equals("true")) {
-            this.loginInfoLabel.setText("Logged as " + SettingsManager.getInstance().getProperty("login"));
-        } else {
-            this.loginInfoLabel.setText("Not logged.");
+            log.log(Level.INFO, "Cannot load menu");
         }
     }
 
@@ -118,16 +109,25 @@ public class MainController {
         }
     }
 
+    private void updateLoginInfo() {
+        if (osClient.checkSession() &&
+                !SettingsManager.getInstance().getProperty("login").isEmpty() &&
+                SettingsManager.getInstance().getProperty("isLoggedAsUser").equals("true")) {
+            this.loginInfoLabel.setText("Logged as " + SettingsManager.getInstance().getProperty("login"));
+        } else {
+            this.loginInfoLabel.setText("Not logged in.");
+        }
+    }
+
     /**
      * This method is used for not expiring current client session. This method is called every 10 minutes.
      */
-    public void initSessionChecker() {
+    private void initSessionChecker() {
         Timer timer = new Timer();
 
         timer.schedule(new TimerTask() {
             public void run() {
                 initLogin();
-
             }
         }, 10 * 60 * 1000, 10 * 60 * 1000);
     }
@@ -158,6 +158,5 @@ public class MainController {
     private void minimize() {
         Stage stage = (Stage) minimize.getScene().getWindow();
         stage.setIconified(true);
-
     }
 }

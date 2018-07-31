@@ -33,7 +33,7 @@ public class DashboardController {
     private HBox progressBarPane;
 
     @FXML
-    Text textInfo, limitInfo;
+    private Text textInfo, limitInfo;
 
     private CustomProgressBar customProgressBar;
     private SubtitlesManager subtitlesManager;
@@ -41,6 +41,7 @@ public class DashboardController {
 
     private ObservableList<SubtitlesInfo> subtitlesList;
     private ListView<SubtitlesInfo> subtitlesListView;
+
     protected final Logger log = Logger.getLogger(getClass().getName());
 
     public void initialize() {
@@ -121,12 +122,12 @@ public class DashboardController {
 
             subtitlesListView.setCellFactory(param -> new SubtitleCell());
 
-            for (int i = 0; i < moviesPaths.size(); i++) {
+            for (File moviesPath : moviesPaths) {
                 SubtitlesInfo subtitlesInfo;
                 TMDBMovieInfo tmdbMovie;
 
                 try {
-                    String movieName = FilenameUtils.removeExtension(moviesPaths.get(i).getName());
+                    String movieName = FilenameUtils.removeExtension(moviesPath.getName());
 
                     titleConverter = new TitleConverter(movieName);
 
@@ -145,7 +146,7 @@ public class DashboardController {
                     subtitlesInfo.setTmdbMovie(tmdbMovie);
                     subtitlesInfo.setSeason(titleConverter.getSeason());
                     subtitlesInfo.setEpisode(titleConverter.getEpisode());
-                    subtitlesInfo.setDestinationPath(moviesPaths.get(i).getParent());
+                    subtitlesInfo.setDestinationPath(moviesPath.getParent());
                     subtitlesInfo.setFileName(movieName);
                     subtitlesInfo.setLanguageFormat(
                             SettingsManager.getInstance().getLanguageCodes().convertISO6392_ToISO639_3(

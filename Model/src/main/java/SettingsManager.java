@@ -45,36 +45,35 @@ public class SettingsManager extends Properties {
             JsonWriter jsonWriter = new JsonWriter(new FileWriter(destinationPath));
             jsonWriter.beginObject();
 
-            if (password != null) {
-                if (!(login.isEmpty() | password.isEmpty())) {
-                    jsonWriter.name("login").value(login);
-                    instance.setProperty("login", login);
+            if(password != null && login != null) {
+                jsonWriter.name("login").value(login);
+                instance.setProperty("login", login);
 
+                if(!password.isEmpty()) {
                     jsonWriter.name("password").value(encryptPassword(password));
                     instance.setProperty("password", encryptPassword(password));
                 } else {
-                    jsonWriter.name("login").value("");
-                    instance.setProperty("login", "");
-
-                    jsonWriter.name("password").value("");
-                    instance.setProperty("password", "");
+                    jsonWriter.name("password").value(DEFAULT_PASSWORD);
+                    instance.setProperty("password", DEFAULT_PASSWORD);
                 }
             } else {
-                jsonWriter.name("login").value(login);
+                jsonWriter.name("login").value(SettingsManager.getInstance().getProperty("login"));
                 jsonWriter.name("password").value(SettingsManager.getInstance().getProperty("password"));
             }
 
             jsonWriter.name("language").value(languageCodes.getISO639_3(language));
             instance.setProperty("language", languageCodes.getISO639_3(language));
+
             jsonWriter.name("extension").value(extension);
             instance.setProperty("extension", extension);
+
             jsonWriter.name("extended").value(extended);
             instance.setProperty("extended", extended);
 
             jsonWriter.endObject();
             jsonWriter.close();
         } catch (IOException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            instance.log.log(Level.INFO, "SettingsManager: Failed to save settings.");
         }
     }
 
@@ -84,7 +83,7 @@ public class SettingsManager extends Properties {
                 instance = new SettingsManager();
 
                 JsonParser jsonParser = new JsonParser();
-                JsonElement root = null;
+                JsonElement root;
 
                 root = jsonParser.parse(new FileReader(instance.destinationPath));
                 JsonObject jsonObject = root.getAsJsonObject();
@@ -124,10 +123,6 @@ public class SettingsManager extends Properties {
         return instance;
     }
 
-    public ArrayList<String> getAllExtensions() {
-        return extensions;
-    }
-
     private String encryptPassword(String password) throws NoSuchAlgorithmException {
         final MessageDigest messageDigest = MessageDigest.getInstance("MD5");
         messageDigest.reset();
@@ -135,6 +130,10 @@ public class SettingsManager extends Properties {
         final byte[] resultByte = messageDigest.digest();
 
         return new String(Hex.encodeHex(resultByte));
+    }
+
+    public ArrayList<String> getAllExtensions() {
+        return extensions;
     }
 
     public LanguageCodes getLanguageCodes() {

@@ -37,6 +37,16 @@ public class SubtitlesSyncer {
         }
     }
 
+    public void save() {
+        try {
+            Writer fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(subtitlePath), "UTF-8"));
+            fileWriter.write(subtitles);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private String srtShifter(String time, double offset) {
         int hours = Integer.parseInt(time.substring(0, 2));
         int minutes = Integer.parseInt(time.substring(3, 5));
@@ -44,11 +54,11 @@ public class SubtitlesSyncer {
         int miliseconds = Integer.parseInt(time.substring(9));
 
         int msOffset = (int) (offset * 1000);
-        int totalSeconds = (int) (msOffset / 1000);
+        int totalSeconds = (msOffset / 1000);
 
-        int addSeconds = (int) (msOffset / 1000) % 60;
-        int addMinutes = (int) ((msOffset / (1000 * 60)) % 60);
-        int addHours = (int) ((msOffset / (1000 * 60 * 60)));
+        int addSeconds = (msOffset / 1000) % 60;
+        int addMinutes = ((msOffset / (1000 * 60)) % 60);
+        int addHours = ((msOffset / (1000 * 60 * 60)));
         int addMiliseconds = msOffset - (totalSeconds * 1000);
 
         addSeconds += ((miliseconds + addMiliseconds) / 1000);
@@ -86,15 +96,5 @@ public class SubtitlesSyncer {
         }
 
         return String.format("%1$02d:%2$02d:%3$02d,%4$03d", hours, minutes, seconds, miliseconds);
-    }
-
-    public void save() {
-        try {
-            Writer fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(subtitlePath), "UTF-8"));
-            fileWriter.write(subtitles);
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

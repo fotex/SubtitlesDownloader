@@ -18,17 +18,16 @@ public class SettingsController {
     @FXML
     private CheckBox checkBox_extended;
 
-    private boolean passwordChanged = false;
+    private boolean loginDataChanged = false;
 
     public void initialize() {
 
         loginField.setPromptText("login");
         loginField.setText(SettingsManager.getInstance().getProperty("login"));
+        loginField.textProperty().addListener((observable, oldValue, newValue) -> loginDataChanged = true);
 
         passwordField.setPromptText("password");
-        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
-            passwordChanged = true;
-        });
+        passwordField.textProperty().addListener((observable, oldValue, newValue) -> loginDataChanged = true);
 
         selectBox_language.getItems().addAll(SettingsManager.getInstance().getLanguageCodes().getAllLanguages());
         selectBox_language.getSelectionModel().select(SettingsManager.getInstance().getLanguageCodes()
@@ -45,6 +44,9 @@ public class SettingsController {
     public void save() {
         String language = null;
         String extension = null;
+        String login = null;
+        String password = null;
+        String extended;
 
         if (selectBox_language.getSelectionModel().getSelectedItem() != null) {
             language = selectBox_language.getSelectionModel().getSelectedItem().toString();
@@ -53,14 +55,9 @@ public class SettingsController {
             extension = selectBox_extension.getSelectionModel().getSelectedItem().toString();
         }
 
-        String login = loginField.getText();
-        String password;
-        String extended;
-
-        if (passwordChanged) {
+        if (loginDataChanged) {
             password = passwordField.getText();
-        } else {
-            password = null;
+            login = loginField.getText();
         }
 
         if (checkBox_extended.isSelected()) {
@@ -71,13 +68,12 @@ public class SettingsController {
 
         SettingsManager.getInstance().saveSettings(login, password, language, extension, extended);
 
-        if(passwordChanged) {
+        if(loginDataChanged) {
             OSClient osClient = new OSClient();
             osClient.setLoginToken(SettingsManager.getInstance().getProperty("loginToken"));
             osClient.logout();
 
             ControllerConnector.getController().initLogin();
-            ControllerConnector.getController().updateLoginInfo();
         }
     }
 }

@@ -28,8 +28,12 @@ public class BlockedSubtitlesController {
         subtitlesListView.setPrefHeight(main_pane.getPrefHeight());
         subtitlesListView.getStyleClass().setAll("subtitlelist");
 
-        ArrayList<SubtitlesInfo> blockedSubtitles = subtitlesBlocker.getBlockedSubtitles();
+        initBlockedSubtitleListener();
+        showBlockedSubtitles();
+    }
 
+
+    private void initBlockedSubtitleListener() {
         subtitlesList.addListener((ListChangeListener<SubtitlesInfo>) c -> {
             while (c.next()) {
                 if (c.wasRemoved()) {
@@ -42,6 +46,10 @@ public class BlockedSubtitlesController {
                 }
             }
         });
+    }
+
+    private void showBlockedSubtitles() {
+        ArrayList<SubtitlesInfo> blockedSubtitles = subtitlesBlocker.getBlockedSubtitles();
 
         Thread thread = new Thread(() -> {
             subtitlesListView.setCellFactory(param -> new BlockedSubtitleCell());

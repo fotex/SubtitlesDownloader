@@ -12,16 +12,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OSClient {
+
     private final String API_URL = "https://api.opensubtitles.org:443/xml-rpc";
+    private final String API_USERAGENT = "fotexsubtitles";
 
     private String loginToken;
+    private final String RESULT_LIMIT = "30";
+    private final int MAX_RETRIES = 3;
+
     private XmlRpcClientConfigImpl xmlrcpConfig;
     private XmlRpcClient xmlrpcClient;
-    private final String RESULT_LIMIT = "30";
+
     private SubtitlesBlocker subtitlesBlocker;
 
     protected final Logger log = Logger.getLogger(getClass().getName());
-    private final int MAX_RETRIES = 3;
 
     public OSClient() {
         xmlrcpConfig = new XmlRpcClientConfigImpl();
@@ -40,16 +44,14 @@ public class OSClient {
     }
 
     public boolean login(String username, String password) {
-        Object[] parameters = new Object[]{username, password, "eng", "fotexsubtitles"};
-        HashMap<?, ?> result = null;
+        Object[] parameters = new Object[]{username, password, "eng", API_USERAGENT};
+        HashMap<?, ?> result;
         try {
             result = execute("LogIn", parameters);
             loginToken = (String) result.get("token");
             String status = (String) result.get("status");
 
-            if ((username.isEmpty() || password.isEmpty()) && status.equals("200 OK")) {
-                return false;
-            } else return status.equals("200 OK");
+            return ((!username.isEmpty() && !password.isEmpty()) || !status.equals("200 OK")) && status.equals("200 OK");
 
         } catch (OSException e) {
             e.printStackTrace();
@@ -58,7 +60,7 @@ public class OSClient {
         return false;
     }
 
-    public SubtitlesInfo searchSubtitles(String imdbID, String seasonNumber, String episodeNumber, String language, String extension, boolean extended) throws OSException, XmlRpcException {
+    public SubtitlesInfo searchSubtitles(String imdbID, String seasonNumber, String episodeNumber, String language, String extension, boolean searchExtended) throws OSException, XmlRpcException {
         HashMap<?, ?> result;
         HashMap<String, Object> firstParameters = new HashMap<>();
         HashMap<String, Object> secondParameters = new HashMap<>();
@@ -79,21 +81,20 @@ public class OSClient {
 
         Object[] resultData = (Object[]) result.get("data");
 
-        for (int i = 0; i < resultData.length; i++) {
-            data = (HashMap<String, String>) resultData[i];
+        for (Object aResultData : resultData) {
+            data = (HashMap<String, String>) aResultData;
             if (data.get("SubFormat").equals(extension) &&
                     !subtitlesBlocker.isSubtitleBlocked(data.get("IDSubtitleFile"))) {
-                SubtitlesInfo subtitlesInfo = new SubtitlesInfo((HashMap<String, String>) resultData[i]);
+                SubtitlesInfo subtitlesInfo = new SubtitlesInfo((HashMap<String, String>) aResultData);
 
-                if(extended) {
-                    if(searchExtended(subtitlesInfo.getSubtitleFileName())) {
+                if (searchExtended) {
+                    if (isExtended(subtitlesInfo.getSubtitleFileName())) {
                         subtitlesInfo.setExtended(true);
                         return subtitlesInfo;
                     }
                 } else {
                     return subtitlesInfo;
                 }
-
             }
         }
 
@@ -155,7 +156,7 @@ public class OSClient {
         return result;
     }
 
-    private boolean searchExtended(String subtitleName) {
+    private boolean isExtended(String subtitleName) {
         String nameWithSeason = "(Extended|extended|EXTENDED)";
         Pattern r = Pattern.compile(nameWithSeason);
         Matcher m = r.matcher(subtitleName);

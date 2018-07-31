@@ -1,5 +1,4 @@
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 import java.util.HashMap;
@@ -7,12 +6,10 @@ import java.util.HashMap;
 public class Menu {
 
     private Text title;
-    private BorderPane rootPane;
     private HashMap<String, ImageView> menuList = new HashMap<>();
 
-    public Menu(Text title, BorderPane borderPane) {
+    public Menu(Text title) {
         this.title = title;
-        this.rootPane = rootPane;
     }
 
     public String changeFocus(ImageView menu) {
