@@ -87,10 +87,8 @@ public class SubtitlesBlocker {
 
                 JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
 
-                HashMap<String, String> parameter = new HashMap<>();
-                parameter.put("IDSubtitleFile", jsonObject.get("subid").getAsString());
 
-                SubtitlesInfo subtitlesInfo = new SubtitlesInfo(parameter);
+                SubtitlesInfo subtitlesInfo = new SubtitlesInfo(jsonObject);
 
                 subtitlesInfo.setBlocked(true);
                 subtitlesInfo.setFileName(jsonObject.get("name").getAsString());
@@ -125,6 +123,7 @@ public class SubtitlesBlocker {
 
             JsonArray jsonArray = root.getAsJsonArray();
             for (int i = 0; i < jsonArray.size(); i++) {
+
                 JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
                 if (jsonObject.get("subid").getAsString().equals(id)) {
                     return true;

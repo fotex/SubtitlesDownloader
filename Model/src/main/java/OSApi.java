@@ -4,15 +4,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OSApi {
 
     private final String API_URL = "https://rest.opensubtitles.org/search/";
+    private final String API_USERAGENT = "fotexsubtitles";
 
     private final String API_SEARCH_EPISODE = "episode-";
     private final String API_SEARCH_SEASON = "season-";
@@ -28,8 +29,8 @@ public class OSApi {
 
         URL url = buildSearchUrl(imdbID, seasonNumber, episodeNumber, language);
 
-        URLConnection request = url.openConnection();
-        request.setRequestProperty("User-Agent", "fotexsubtitles");
+        HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        request.setRequestProperty("User-Agent", API_USERAGENT);
         request.connect();
 
         JsonParser jsonParser = new JsonParser();
@@ -49,7 +50,7 @@ public class OSApi {
             JsonObject data = subtitles.get(i).getAsJsonObject();
 
             if(data.get("SubFormat").getAsString().equals(extension) &&
-               !subtitlesBlocker.isSubtitleBlocked(data.get("IDSubtitle").getAsString())) {
+               !subtitlesBlocker.isSubtitleBlocked(data.get("IDSubtitleFile").getAsString())) {
                 SubtitlesInfo subtitlesInfo = new SubtitlesInfo(data);
 
                 if (extended) {
@@ -60,12 +61,10 @@ public class OSApi {
                 } else {
                     return subtitlesInfo;
                 }
-            } else {
-                throw new OSException("Subtitle not found!");
             }
         }
 
-        return null;
+        throw new OSException("Subtitle not found.");
     }
 
     private URL buildSearchUrl(String imdbID, String seasonNumber, String episodeNumber, String language) {

@@ -1,3 +1,4 @@
+import com.google.gson.JsonObject;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -14,10 +15,18 @@ public class SubtitleBlockerTest {
         TMDBMovieInfo tmdbMovieInfo = new TMDBMovieInfo();
         tmdbMovieInfo.setMovieName("test movie");
 
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("IDSubtitleFile", "12345");
+        jsonObject.addProperty("SubFormat", "srt");
+        jsonObject.addProperty("LanguageName", "");
+        jsonObject.addProperty("SubDownloadLink", "");
+        jsonObject.addProperty("SubEncoding", "");
+        jsonObject.addProperty("SubFileName", "");
+
         info.put("IDSubtitleFile", "12345");
         info.put("SubFormat", "srt");
 
-        SubtitlesInfo subtitleInfo = new SubtitlesInfo(info);
+        SubtitlesInfo subtitleInfo = new SubtitlesInfo(jsonObject);
         subtitleInfo.setTmdbMovie(tmdbMovieInfo);
         subtitleInfo.setSeason("01");
         subtitleInfo.setEpisode("02");

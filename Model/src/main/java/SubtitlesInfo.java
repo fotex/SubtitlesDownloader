@@ -1,15 +1,11 @@
 import com.google.gson.JsonObject;
 
-import java.util.HashMap;
-
 public class SubtitlesInfo {
 
     private TMDBMovieInfo tmdbMovie;
 
     private String language;
-    private String downloadsCount;
     private String downloadURL;
-    private String userRank;
     private String subtitleFormat;
     private String destinationPath;
     private String languageFormat;
@@ -24,28 +20,29 @@ public class SubtitlesInfo {
     private boolean isExtended;
     private boolean isBlocked;
 
-    SubtitlesInfo(HashMap<String, String> data) {
-        language = data.get("LanguageName");
-        downloadsCount = data.get("SubDownloadsCnt");
-        downloadURL = data.get("SubDownloadLink");
-        userRank = data.get("UserRank");
-        subtitleFormat = data.get("SubFormat");
-        subtitleEncoding = data.get("SubEncoding");
-        subtitlesId = data.get("IDSubtitleFile");
-        subtitleFileName = data.get("SubFileName");
-        isBlocked = false;
-        isExtended = false;
-    }
-
     SubtitlesInfo(JsonObject data) {
-        language = data.get("LanguageName").getAsString();
-        downloadsCount = data.get("SubDownloadsCnt").getAsString();
-        downloadURL = data.get("SubDownloadLink").getAsString();
-        userRank = data.get("UserRank").getAsString();
-        subtitleFormat = data.get("SubFormat").getAsString();
-        subtitleEncoding = data.get("SubEncoding").getAsString();
-        subtitlesId = data.get("IDSubtitleFile").getAsString();
-        subtitleFileName = data.get("SubFileName").getAsString();
+        if(data.get("LanguageName") != null) {
+            language = data.get("LanguageName").getAsString();
+        }
+        if(data.get("SubDownloadLink") != null) {
+            downloadURL = data.get("SubDownloadLink").getAsString();
+        }
+        if(data.get("SubFormat") != null) {
+            subtitleFormat = data.get("SubFormat").getAsString();
+        }
+        if(data.get("SubEncoding") != null) {
+            subtitleEncoding = data.get("SubEncoding").getAsString();
+        }
+        if(data.get("IDSubtitleFile") != null) {
+            subtitlesId = data.get("IDSubtitleFile").getAsString();
+        }
+        if(data.get("SubFileName") != null) {
+            subtitleFileName = data.get("SubFileName").getAsString();
+        }
+        if(data.get("subid") != null) {
+            subtitlesId = data.get("subid").getAsString();
+        }
+
         isBlocked = false;
         isExtended = false;
     }
@@ -70,16 +67,8 @@ public class SubtitlesInfo {
         this.fileName = fileName;
     }
 
-    public String getDownloadsCount() {
-        return downloadsCount;
-    }
-
     public String getDownloadURL() {
         return downloadURL;
-    }
-
-    public String getUserRank() {
-        return userRank;
     }
 
     public String getSubtitleFormat() {
