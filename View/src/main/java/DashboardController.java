@@ -113,12 +113,10 @@ public class DashboardController {
 
             Platform.runLater(() -> customProgressBar.start());
 
-            OSClient client = new OSClient();
             TMDBClient tmdbClient = new TMDBClient();
+            OSApi osApi = new OSApi();
 
             TitleConverter titleConverter;
-
-            client.setLoginToken(SettingsManager.getInstance().getProperty("loginToken"));
 
             subtitlesListView.setCellFactory(param -> new SubtitleCell());
 
@@ -135,7 +133,7 @@ public class DashboardController {
 
                     tmdbMovie = tmdbClient.search(titleConverter.getConvertedName(), titleConverter.isTVShow());
 
-                    subtitlesInfo = client.searchSubtitles(
+                    subtitlesInfo = osApi.searchSubtitle(
                             tmdbMovie.getImdbId(),
                             titleConverter.getSeason(),
                             titleConverter.getEpisode(),
@@ -155,7 +153,7 @@ public class DashboardController {
 
                     subtitlesManager.add(subtitlesInfo);
 
-                } catch (IOException | XmlRpcException | TMDBException | OSException e) {
+                } catch (IOException | TMDBException | OSException e) {
                     log.log(Level.INFO, "Subtitle not found.");
                 }
             }

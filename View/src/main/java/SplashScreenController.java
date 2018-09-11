@@ -28,7 +28,6 @@ public class SplashScreenController {
                 waitForConnection();
             } else {
                 Platform.runLater(() -> loadingInfo.setText("Connecting to OpenSubtitles API..."));
-                initLogin();
 
                 Platform.runLater(() -> {
                     loadingInfo.setText("Logged...");
@@ -56,15 +55,6 @@ public class SplashScreenController {
         });
         thread.start();
 
-    }
-
-    public void initLogin() {
-        OSClient osClient = new OSClient();
-        boolean isLoggedAsUser = osClient.login(SettingsManager.getInstance().getProperty("login"),
-                SettingsManager.getInstance().getProperty("password"));
-
-        SettingsManager.getInstance().setProperty("loginToken", osClient.getLoginToken());
-        SettingsManager.getInstance().setProperty("isLoggedAsUser", String.valueOf(isLoggedAsUser));
     }
 
     public void waitForConnection() {

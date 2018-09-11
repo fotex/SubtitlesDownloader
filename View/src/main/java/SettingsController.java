@@ -7,27 +7,12 @@ import javafx.scene.control.TextField;
 public class SettingsController {
 
     @FXML
-    private TextField loginField;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
     private ComboBox selectBox_language, selectBox_extension;
 
     @FXML
     private CheckBox checkBox_extended;
 
-    private boolean loginDataChanged = false;
-
     public void initialize() {
-
-        loginField.setPromptText("login");
-        loginField.setText(SettingsManager.getInstance().getProperty("login"));
-        loginField.textProperty().addListener((observable, oldValue, newValue) -> loginDataChanged = true);
-
-        passwordField.setPromptText("password");
-        passwordField.textProperty().addListener((observable, oldValue, newValue) -> loginDataChanged = true);
 
         selectBox_language.getItems().addAll(SettingsManager.getInstance().getLanguageCodes().getAllLanguages());
         selectBox_language.getSelectionModel().select(SettingsManager.getInstance().getLanguageCodes()
@@ -44,8 +29,6 @@ public class SettingsController {
     public void save() {
         String language = null;
         String extension = null;
-        String login = null;
-        String password = null;
         String extended;
 
         if (selectBox_language.getSelectionModel().getSelectedItem() != null) {
@@ -55,25 +38,12 @@ public class SettingsController {
             extension = selectBox_extension.getSelectionModel().getSelectedItem().toString();
         }
 
-        if (loginDataChanged) {
-            password = passwordField.getText();
-            login = loginField.getText();
-        }
-
         if (checkBox_extended.isSelected()) {
             extended = "true";
         } else {
             extended = "false";
         }
 
-        SettingsManager.getInstance().saveSettings(login, password, language, extension, extended);
-
-        if(loginDataChanged) {
-            OSClient osClient = new OSClient();
-            osClient.setLoginToken(SettingsManager.getInstance().getProperty("loginToken"));
-            osClient.logout();
-
-            ControllerConnector.getController().initLogin();
-        }
+        SettingsManager.getInstance().saveSettings(language, extension, extended);
     }
 }

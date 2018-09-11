@@ -37,8 +37,6 @@ public class MainController {
     private Menu menu;
     private Parent root;
 
-    private OSClient osClient;
-
     private final String APP_NAME = "Subtitles Downloader";
     private final String APP_VERSION = "1.0.8_alpha";
 
@@ -49,12 +47,6 @@ public class MainController {
 
     public void initialize() {
         appName.setText(APP_NAME + " " + APP_VERSION);
-
-        osClient = new OSClient();
-        osClient.setLoginToken(SettingsManager.getInstance().getProperty("loginToken"));
-
-        updateLoginInfo();
-        initSessionChecker();
 
         menu = new Menu(title);
         menu.add("Dashboard", menu_dashboard);
@@ -95,41 +87,6 @@ public class MainController {
         } catch (IOException e) {
             log.log(Level.INFO, "Cannot load menu");
         }
-    }
-
-    public void initLogin() {
-        if (!osClient.checkSession()) {
-            boolean isLoggedAsUser = osClient.login(SettingsManager.getInstance().getProperty("login"),
-                    SettingsManager.getInstance().getProperty("password"));
-
-            SettingsManager.getInstance().setProperty("loginToken", osClient.getLoginToken());
-            SettingsManager.getInstance().setProperty("isLoggedAsUser", String.valueOf(isLoggedAsUser));
-
-            updateLoginInfo();
-        }
-    }
-
-    private void updateLoginInfo() {
-        if (osClient.checkSession() &&
-                !SettingsManager.getInstance().getProperty("login").isEmpty() &&
-                SettingsManager.getInstance().getProperty("isLoggedAsUser").equals("true")) {
-            this.loginInfoLabel.setText("Logged as " + SettingsManager.getInstance().getProperty("login"));
-        } else {
-            this.loginInfoLabel.setText("Not logged in.");
-        }
-    }
-
-    /**
-     * This method is used for not expiring current client session. This method is called every 10 minutes.
-     */
-    private void initSessionChecker() {
-        Timer timer = new Timer();
-
-        timer.schedule(new TimerTask() {
-            public void run() {
-                initLogin();
-            }
-        }, 10 * 60 * 1000, 10 * 60 * 1000);
     }
 
     @FXML
