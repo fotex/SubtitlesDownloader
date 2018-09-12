@@ -12,7 +12,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.xmlrpc.XmlRpcException;
 
 import java.io.File;
 import java.io.IOException;

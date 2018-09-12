@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class MainController {
 
     @FXML
-    private Text title, loginInfoLabel, appName;
+    private Text title, appName;
 
     @FXML
     private ImageView menu_dashboard, menu_subtitle, menu_settings, menu_blockedsubtitles;

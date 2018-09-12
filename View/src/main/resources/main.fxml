@@ -21,20 +21,7 @@
                 <Font name="Segoe UI" size="12.0" />
             </font>
         </Text>
-        <AnchorPane layoutX="537.0" layoutY="26.0" prefHeight="33.0" prefWidth="275.0" AnchorPane.rightAnchor="12.0">
-            <children>
-                <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="244.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@images/64/user-circle.png" />
-                    </image>
-                </ImageView>
-                <Text fx:id="loginInfoLabel" fill="WHITE" layoutX="9.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not logged in." textAlignment="RIGHT" wrappingWidth="223.38671571016312">
-                    <font>
-                        <Font name="Segoe UI" size="12.0" />
-                    </font>
-                </Text>
-            </children>
-        </AnchorPane>
+        <AnchorPane layoutX="537.0" layoutY="26.0" prefHeight="33.0" prefWidth="275.0" AnchorPane.rightAnchor="12.0" />
         <AnchorPane prefHeight="498.0" prefWidth="57.0">
             <children>
                 <Pane layoutY="22.0" prefHeight="498.0" prefWidth="53.0" style="-fx-background-color: #263238;">
