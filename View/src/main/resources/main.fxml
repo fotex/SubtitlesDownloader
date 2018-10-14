@@ -46,6 +46,11 @@
                                 <Image url="@images/64/ban.png" />
                             </image>
                         </ImageView>
+                  <ImageView fx:id="menu_info" fitHeight="31.0" fitWidth="31.0" layoutX="11.0" layoutY="411.0" onMouseClicked="#onMenuHandle" opacity="0.2" pickOnBounds="true" preserveRatio="true" styleClass="menu">
+                     <image>
+                        <Image url="@images/64/info.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </Pane>
             </children>

@@ -6,12 +6,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class CustomProgressBar {
+public class LoadingAnimation {
 
     private Circle circle;
     private HBox hBox;
 
-    public CustomProgressBar(HBox hBox) {
+    public LoadingAnimation(HBox hBox) {
 
         this.hBox = hBox;
 

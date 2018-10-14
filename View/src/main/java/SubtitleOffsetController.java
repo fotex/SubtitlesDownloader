@@ -1,92 +1,183 @@
-import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
+import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.regex.Pattern;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class SubtitleOffsetController {
-
-    @FXML
-    private Text subtitleName, status;
+public class SubtitleOffsetController implements Initializable {
 
     @FXML
-    private TextField timeShift;
+    private Line progressLine;
 
     @FXML
-    private AnchorPane subtitleOffset_pane;
+    private Pane progressBar, timePane;
 
     @FXML
-    private HBox progressBarPane;
+    private Text currentSubtitleText, clickedCellText;
 
-    private String subtitlePath;
-    private CustomProgressBar customProgressBar;
+    @FXML
+    private ImageView saveButton, playButton, leftShiftButton, rightShiftButton, statusImage;
 
-    public void initialize() {
-        customProgressBar = new CustomProgressBar(progressBarPane);
+    public static MediaPlayer mediaPlayer;
+
+    private AudioProgressBar audioProgressBar;
+    private SrtManager srtManager;
+    private SubtitleOffsetCells subtitleOffsetCells;
+
+    public SubtitleOffsetController(SrtManager srtManager) {
+        this.srtManager = srtManager;
     }
 
-    @FXML
-    public void openSubtitle() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open subtitles file.");
+    public void initialize(URL location, ResourceBundle resources) {
+        File movieFile = new File("tmp/moviesound.mp3");
+        String filePath = movieFile.toURI().toString();
+        Media media = new Media(filePath);
 
-        FileChooser.ExtensionFilter fileExtensions =
-                new FileChooser.ExtensionFilter(
-                        "Subtitle extensions", "*.srt");
-
-        fileChooser.getExtensionFilters().add(fileExtensions);
-
-        File subtitleFile = fileChooser.showOpenDialog(status.getScene().getWindow());
-        if (subtitleFile != null) {
-            subtitlePath = subtitleFile.getAbsolutePath();
-            subtitleName.setText(subtitleFile.getName());
-            status.setText("Loaded subtitle.");
-            subtitleOffset_pane.setVisible(true);
+        if (mediaPlayer == null) {
+            mediaPlayer = new MediaPlayer(media);
         }
+
+        playButtonListener();
+        shiftButtonsListener();
+        saveButtonListener();
+        mediaPlayerInitialize();
+
+        statusImage.setVisible(false);
     }
 
-    @FXML
-    public void save() {
-        Thread thread = new Thread(() -> {
+    private void mediaPlayerInitialize() {
+        mediaPlayer.setOnStopped(() -> mediaPlayer = null);
 
-            Platform.runLater(() -> customProgressBar.start());
+        mediaPlayer.setOnReady(new Runnable() {
 
-            String offsetPattern = "-{0,1}([0-9]+?)\\.{1}([0-9]{1,3})";
-            boolean matcher = Pattern.matches(offsetPattern, timeShift.getText());
+            public void run() {
 
-            if (matcher) {
-                String offsetstr = String.format("%.3f", Double.parseDouble(timeShift.getText()));
-                double offset = Double.parseDouble(offsetstr);
-                SubtitlesSyncer subtitlesSyncer = new SubtitlesSyncer(subtitlePath);
-                try {
-                    subtitlesSyncer.srtOffset(offset);
-                    subtitlesSyncer.save();
-                    status.setText("Operation successfully completed.");
-                } catch (IOException e) {
-                    status.setText("Error.");
-                }
-            } else {
-                status.setText("Not supported offset value.");
+                audioProgressBar = new AudioProgressBar(progressBar, mediaPlayer);
+                audioProgressBar.addProgressLine(progressLine);
+                audioProgressBar.initializeListeners();
+                audioProgressBar.drawMarks();
+                subtitleOffsetCells = new SubtitleOffsetCells(srtManager, mediaPlayer, progressBar);
+                subtitleOffsetCells.setClickedText(clickedCellText);
+
+                subtitleOffsetCells.draw();
+
+                mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+                    public void changed(ObservableValue<? extends Duration> observable, Duration oldValue, Duration newValue) {
+
+                        audioProgressBar.updateProgress(newValue);
+                        subtitleOffsetCells.showCurrentSubtitleText(currentSubtitleText, newValue);
+
+                    }
+                });
+
+                mediaPlayer.play();
+
             }
 
-            Platform.runLater(() -> customProgressBar.stop());
-
         });
-        thread.start();
     }
 
-    @FXML
-    public void cancel() {
-        subtitlePath = "";
-        status.setText("");
-        timeShift.setText("");
-        subtitleOffset_pane.setVisible(false);
+    private void playButtonListener() {
+        ImageView img_play = new ImageView("images/256/play.png");
+        ImageView img_pause = new ImageView("images/256/pause.png");
+
+        mediaPlayer.setOnPlaying(() -> playButton.setImage(img_pause.getImage()));
+        mediaPlayer.setOnPaused(() -> playButton.setImage(img_play.getImage()));
+
+        playButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                playButton.setCursor(Cursor.HAND);
+            }
+        });
+        playButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+                    mediaPlayer.pause();
+                }
+                if (mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED) {
+                    mediaPlayer.play();
+                }
+            }
+        });
     }
 
+    private void shiftButtonsListener() {
+        leftShiftButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                leftShiftButton.setCursor(Cursor.HAND);
+            }
+        });
+        leftShiftButton.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("test");
+                mediaPlayer.seek(Duration.millis(mediaPlayer.getCurrentTime().toMillis() - 1000));
+            }
+        });
+        rightShiftButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                rightShiftButton.setCursor(Cursor.HAND);
+            }
+        });
+        rightShiftButton.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("test");
+                mediaPlayer.seek(Duration.millis(mediaPlayer.getCurrentTime().toMillis() + 1000));
+            }
+        });
+    }
+
+    private void saveButtonListener() {
+
+        ImageView img_ok = new ImageView("images/256/circle_ok.png");
+        ImageView img_error = new ImageView("images/256/circle_error.png");
+
+        saveButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                saveButton.setCursor(Cursor.HAND);
+            }
+        });
+        saveButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                SrtSubtitlesSyncer srtSubtitlesSyncer = new SrtSubtitlesSyncer(srtManager.getSubtitlePath());
+
+                float offset = subtitleOffsetCells.getOffset() / 1000f;
+
+                System.out.println(offset);
+
+                try {
+                    srtSubtitlesSyncer.offset(offset);
+                    srtSubtitlesSyncer.save();
+                    subtitleOffsetCells.setOffset(0);
+                    statusImage.setImage(img_ok.getImage());
+                    statusImage.setVisible(true);
+                } catch (IOException e) {
+                    statusImage.setImage(img_error.getImage());
+                    statusImage.setVisible(true);
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }

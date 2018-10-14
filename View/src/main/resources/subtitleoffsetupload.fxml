@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #455A64;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SubtitleOffsetUpload">
+   <children>
+      <BorderPane fx:id="rootPane" prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane fx:id="dropMoviePane" onDragDropped="#onDropMovie" onDragOver="#onDragDrop" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #455A64;" styleClass="dragdrop-pane">
+                     <children>
+                        <Separator layoutY="195.0" prefHeight="11.0" prefWidth="600.0" style="-fx-background-color: #455A64;;" />
+                        <ImageView fx:id="movieImage" fitHeight="218.0" fitWidth="224.0" layoutX="191.0" layoutY="-9.0" opacity="0.05" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/256/film.png" />
+                           </image>
+                        </ImageView>
+                        <Text fx:id="movieTextInfo" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dragdrop-text-info" text="&lt;movieInfo&gt;" wrappingWidth="600.0" />
+                        <ImageView fx:id="movieStatusImage" fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="25.0" opacity="0.1" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@images/256/circle_ok.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="dropSubtitlePane" layoutY="200.0" onDragDropped="#onDropSubtitle" onDragOver="#onDragDrop" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #455A64;;" styleClass="dragdrop-pane">
+                     <children>
+                        <ImageView fx:id="subtitleImage" fitHeight="180.0" fitWidth="326.0" layoutX="233.0" layoutY="10.0" opacity="0.05" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/256/subtitle.png" />
+                           </image>
+                        </ImageView>
+                        <Text fx:id="subtitleTextInfo" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dragdrop-text-info" text="&lt;subtitleInfo&gt;" wrappingWidth="600.0" />
+                        <ImageView fx:id="subtitleStatusImage" fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="25.0" opacity="0.1" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@images/256/circle_ok.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <HBox fx:id="progressBarPane" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" visible="false" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

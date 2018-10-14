@@ -5,22 +5,17 @@ import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SubtitlesSyncer {
+public class SrtSubtitlesSyncer {
 
     private String subtitlePath;
     private String subtitles;
 
-    /*
-        Only srt subtitles supported.
-     */
-
-    public SubtitlesSyncer(String subtitlePath) {
+    public SrtSubtitlesSyncer(String subtitlePath) {
         this.subtitlePath = subtitlePath;
     }
 
-    public void srtOffset(double time) throws IOException {
+    public void offset(double time) throws IOException {
         subtitles = null;
-
         subtitles = new String(Files.readAllBytes(Paths.get(subtitlePath)), StandardCharsets.UTF_8);
 
         Pattern pattern = Pattern.compile("[0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}");
@@ -31,7 +26,7 @@ public class SubtitlesSyncer {
 
         while (matcher.find()) {
             oldTime = matcher.group();
-            newTime = srtShifter(oldTime, time);
+            newTime = shift(oldTime, time);
 
             subtitles = subtitles.replace(oldTime, newTime);
         }
@@ -47,7 +42,7 @@ public class SubtitlesSyncer {
         }
     }
 
-    private String srtShifter(String time, double offset) {
+    private String shift(String time, double offset) {
         int hours = Integer.parseInt(time.substring(0, 2));
         int minutes = Integer.parseInt(time.substring(3, 5));
         int seconds = Integer.parseInt(time.substring(6, 8));

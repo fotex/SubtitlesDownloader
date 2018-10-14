@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DashboardController {
+public class SubtitleSearcherController {
 
     @FXML
     private AnchorPane subtitlesView;
@@ -34,7 +34,7 @@ public class DashboardController {
     @FXML
     private Text textInfo, limitInfo;
 
-    private CustomProgressBar customProgressBar;
+    private LoadingAnimation customProgressBar;
     private SubtitlesManager subtitlesManager;
     private SubtitlesBlocker subtitlesBlocker;
 
@@ -44,7 +44,7 @@ public class DashboardController {
     protected final Logger log = Logger.getLogger(getClass().getName());
 
     public void initialize() {
-        customProgressBar = new CustomProgressBar(progressBarPane);
+        customProgressBar = new LoadingAnimation(progressBarPane);
         subtitlesManager = new SubtitlesManager();
 
         subtitlesBlocker = new SubtitlesBlocker();
@@ -127,7 +127,6 @@ public class DashboardController {
                     String movieName = FilenameUtils.removeExtension(moviesPath.getName());
 
                     titleConverter = new TitleConverter(movieName);
-
                     titleConverter.convert();
 
                     tmdbMovie = tmdbClient.search(titleConverter.getConvertedName(), titleConverter.isTVShow());

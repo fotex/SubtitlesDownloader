@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="pane_dashboard" prefHeight="370.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/9.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="DashboardController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="SubtitleSearcherController">
     <children>
         <Pane fx:id="dragdropPane" onDragDropped="#onDrop" onDragOver="#onDragDrop" prefHeight="328.0" prefWidth="613.0"
               style="-fx-background-color: #455A64;">

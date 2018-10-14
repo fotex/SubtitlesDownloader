@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #455A64;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="progressBar" layoutX="16.0" layoutY="142.0" prefHeight="100.0" prefWidth="568.0" style="-fx-background-color: #37474F;">
+         <children>
+            <Line fx:id="progressLine" endY="100.0" stroke="WHITE" strokeMiterLimit="0.0" strokeType="OUTSIDE" />
+         </children>
+      </Pane>
+      <Text fx:id="currentSubtitleText" fill="WHITE" layoutX="16.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="567.9999947547913">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="clickedCellText" fill="WHITE" layoutX="16.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="567.9999947547913">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <HBox alignment="CENTER" layoutX="200.0" layoutY="252.0" prefHeight="34.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="leftShiftButton" fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/256/left-shift.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="playButton" fitHeight="21.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/256/play.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="rightShiftButton" fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/256/right-shift.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+      <ImageView fx:id="saveButton" fitHeight="29.0" fitWidth="33.0" layoutX="549.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/256/save.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="clickedCellText1" fill="WHITE" layoutX="26.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="selected-text" textAlignment="CENTER" wrappingWidth="567.9999947547913">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="statusImage" fitHeight="21.0" fitWidth="18.0" layoutX="553.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/256/circle_ok.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

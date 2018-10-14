@@ -16,7 +16,7 @@ public class SettingsManagerTest {
         String extension = "srt";
         String extended = "false";
 
-        SettingsManager.getInstance().saveSettings(language, extension, extended);
+        SettingsManager.getInstance().saveSettings(language, extension, extended, "1", "10");
 
         assertEquals(true, SettingsManager.getInstance().getProperty("language").equals("eng"));
         assertEquals(true, SettingsManager.getInstance().getProperty("extension").equals(extension));

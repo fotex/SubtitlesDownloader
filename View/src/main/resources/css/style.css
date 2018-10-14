@@ -235,3 +235,26 @@
 .lightblue-button:pressed {
     -fx-background-color: #01579B;
 }
+
+/* Drag & Drop */
+.dragdrop-text-info {
+    -fx-fill: white;
+    -fx-font-family: 'Segoe UI';
+    -fx-font-size: 24;
+    -fx-text-alignment: center;
+}
+
+/* Audio Progress Bar */
+.time-mark {
+    -fx-stroke: white;
+    -fx-stroke-type: outside;
+}
+
+.selected-text {
+    -fx-text-fill: #03A9F4;
+}
+
+/* Informations Section */
+.text-white {
+    -fx-fill: #FFFFFF;
+}

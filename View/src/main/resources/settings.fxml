@@ -5,11 +5,12 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="201.0" prefWidth="336.0" style="-fx-background-color: #455A64;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SettingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="336.0" style="-fx-background-color: #455A64;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SettingsController">
     <children>
         <VBox layoutX="20.0" layoutY="36.0" prefHeight="93.0" prefWidth="257.0">
             <children>
@@ -35,6 +36,24 @@
         </VBox>
         <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="192.0" text="Searching Configuration" textFill="WHITE" />
         <Separator layoutX="15.0" layoutY="26.0" prefHeight="17.0" prefWidth="307.0" />
-        <Button layoutX="258.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#save" prefHeight="25.0" prefWidth="64.0" styleClass="orange-button" text="Save" />
+        <Button layoutX="258.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#save" prefHeight="25.0" prefWidth="64.0" styleClass="orange-button" text="Save" />
+      <VBox layoutX="20.0" layoutY="185.0" prefHeight="66.0" prefWidth="257.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="257.0">
+               <children>
+                  <Label minWidth="200.0" text="Number of the first subtitle" textFill="WHITE" />
+                  <TextField fx:id="firstSubField" promptText="Min 1" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="257.0">
+               <children>
+                  <Label minWidth="200.0" text="Number of subtitles" textFill="WHITE" />
+                  <TextField fx:id="numberOfSubField" promptText="Max 15" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="14.0" layoutY="156.0" prefHeight="17.0" prefWidth="192.0" text="Subtitle Offset Configuration" textFill="WHITE" />
+      <Separator layoutX="15.0" layoutY="168.0" prefHeight="17.0" prefWidth="307.0" />
     </children>
 </AnchorPane>

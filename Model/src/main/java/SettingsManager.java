@@ -1,11 +1,7 @@
 import com.google.gson.*;
 import com.google.gson.stream.JsonWriter;
-import org.apache.commons.codec.binary.Hex;
 
 import java.io.*;
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +19,12 @@ public class SettingsManager extends Properties {
     private final String DEFAULT_LANGUAGE = "eng";
     private final String DEFAULT_EXTENSION = "srt";
     private final String DEFAULT_EXDENDEDVERSION = "false";
+    private final String DEFAULT_OFFSET_SUBSNUMBER = "10";
+    private final String DEFAULT_OFFSET_FIRSTSUBID = "1";
+
+    public final int OFFSET_MINSUBSNUMBER = 5;
+    public final int OFFSET_MAXSUBSNUMBER = 15;
+
 
     private LanguageCodes languageCodes;
 
@@ -34,7 +36,7 @@ public class SettingsManager extends Properties {
         extensions.add("sub");
     }
 
-    public void saveSettings(String language, String extension, String extended) {
+    public void saveSettings(String language, String extension, String extended, String firstsubid, String subsnumber) {
         try {
             File file = new File(destinationPath);
 
@@ -51,6 +53,12 @@ public class SettingsManager extends Properties {
 
             jsonWriter.name("extended").value(extended);
             instance.setProperty("extended", extended);
+
+            jsonWriter.name("offset_firstsubid").value(firstsubid);
+            instance.setProperty("offset_firstsubid", firstsubid);
+
+            jsonWriter.name("offset_subtitlesnumber").value(subsnumber);
+            instance.setProperty("offset_subtitlesnumber", subsnumber);
 
             jsonWriter.endObject();
             jsonWriter.close();
@@ -73,6 +81,8 @@ public class SettingsManager extends Properties {
                 String language = jsonObject.get("language").getAsString();
                 String extension = jsonObject.get("extension").getAsString();
                 String extended = jsonObject.get("extended").getAsString();
+                String firstsubid = jsonObject.get("offset_firstsubid").getAsString();
+                String subsnumber = jsonObject.get("offset_subtitlesnumber").getAsString();
 
                 instance.setProperty("extended", extended);
 
@@ -81,10 +91,23 @@ public class SettingsManager extends Properties {
                 } else {
                     instance.setProperty("language", instance.DEFAULT_LANGUAGE);
                 }
+
                 if (instance.extensions.contains(extension)) {
                     instance.setProperty("extension", extension);
                 } else {
                     instance.setProperty("extension", instance.DEFAULT_EXTENSION);
+                }
+
+                if (Integer.parseInt(firstsubid) >= 1) {
+                    instance.setProperty("offset_firstsubid", firstsubid);
+                } else {
+                    instance.setProperty("offset_firstsubid", instance.DEFAULT_OFFSET_FIRSTSUBID);
+                }
+
+                if (Integer.parseInt(subsnumber) <= instance.OFFSET_MAXSUBSNUMBER && Integer.parseInt(subsnumber) >= instance.OFFSET_MINSUBSNUMBER) {
+                    instance.setProperty("offset_subtitlesnumber", subsnumber);
+                } else {
+                    instance.setProperty("offset_subtitlesnumber", instance.DEFAULT_OFFSET_SUBSNUMBER);
                 }
 
             } catch (Exception e) {
@@ -94,6 +117,8 @@ public class SettingsManager extends Properties {
                 instance.setProperty("language", instance.DEFAULT_LANGUAGE);
                 instance.setProperty("extension", instance.DEFAULT_EXTENSION);
                 instance.setProperty("extended", instance.DEFAULT_EXDENDEDVERSION);
+                instance.setProperty("offset_firstsubid", instance.DEFAULT_OFFSET_FIRSTSUBID);
+                instance.setProperty("offset_subtitlesnumber", instance.DEFAULT_OFFSET_SUBSNUMBER);
             }
         }
         return instance;

@@ -1,4 +1,3 @@
-import org.apache.xmlrpc.XmlRpcException;
 import org.junit.Test;
 
 import java.io.IOException;

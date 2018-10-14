@@ -76,7 +76,7 @@ final class SubtitleCell extends ListCell<SubtitlesInfo> {
                 desc = desc + " - S" + item.getSeason() + "E" + item.getEpisode();
             }
 
-            if(item.isExtended()) {
+            if (item.isExtended()) {
                 desc = desc + " *EXTENDED*";
             }
 

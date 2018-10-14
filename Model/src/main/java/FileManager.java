@@ -33,8 +33,17 @@ public class FileManager {
         return filePaths;
     }
 
-    private boolean isMovie(File file) {
+    public boolean isMovie(File file) {
         String[] movieExtensions = new String[]{"mkv", "avi", "mov", "mp4", "flv"};
+
+        if (Arrays.asList(movieExtensions).contains(FilenameUtils.getExtension(file.getAbsolutePath()))) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isSubtitle(File file) {
+        String[] movieExtensions = new String[]{"srt"};
 
         if (Arrays.asList(movieExtensions).contains(FilenameUtils.getExtension(file.getAbsolutePath()))) {
             return true;
