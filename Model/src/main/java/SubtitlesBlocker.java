@@ -24,6 +24,7 @@ public class SubtitlesBlocker {
 
         if (!file.exists()) {
             FileManager.createConfigFile(file);
+            fixFile();
         }
     }
 
