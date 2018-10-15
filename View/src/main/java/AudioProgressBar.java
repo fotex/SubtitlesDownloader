@@ -56,12 +56,8 @@ public class AudioProgressBar {
         progressBar.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
-
-                    System.out.println(event.getX());
-
                     progressLine.setLayoutX(event.getX());
                     mediaPlayer.seek(Duration.millis((event.getX() / maxLine) * mediaPlayer.getMedia().getDuration().toMillis()));
-                    System.out.println("Milis: " + event.getX() / maxLine * mediaPlayer.getMedia().getDuration().toMillis());
                 }
 
             }

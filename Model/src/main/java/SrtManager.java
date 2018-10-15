@@ -43,7 +43,7 @@ public class SrtManager {
         }
     }
 
-    public int convertTimeToMs(String time) {
+    private int convertTimeToMs(String time) {
         int hours = Integer.parseInt(time.substring(0, 2)) * 60 * 60 * 1000;
         int minutes = Integer.parseInt(time.substring(3, 5)) * 60 * 1000;
         int seconds = Integer.parseInt(time.substring(6, 8)) * 1000;
@@ -64,6 +64,11 @@ public class SrtManager {
         return time;
     }
 
+    public void shiftSubtitle(int index, int offset) {
+        subtitlesList.get(index).setStartTimeMs(subtitlesList.get(index).getStartTimeMs() + offset);
+        subtitlesList.get(index).setEndTimeMs(subtitlesList.get(index).getEndTimeMs() + offset);
+    }
+
     public int getSubtitleStartTime(int index) {
         return subtitlesList.get(index).getStartTimeMs();
     }
@@ -76,10 +81,6 @@ public class SrtManager {
         return subtitlesList.get(index).getText();
     }
 
-    public void shiftSubtitle(int index, int offset) {
-        subtitlesList.get(index).setStartTimeMs(subtitlesList.get(index).getStartTimeMs() + offset);
-        subtitlesList.get(index).setEndTimeMs(subtitlesList.get(index).getEndTimeMs() + offset);
-    }
 
     public int getSubtitleListSize() {
         return subtitlesList.size();

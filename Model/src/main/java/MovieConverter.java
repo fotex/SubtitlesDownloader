@@ -15,7 +15,7 @@ public class MovieConverter {
 
     }
 
-    public void convertToWav(File movie, float offset, float duration) throws EncoderException {
+    public void convertToWav(File movie, float offset, float duration) throws ws.schild.jave.EncoderException {
         AudioAttributes audio = new AudioAttributes();
         audio.setCodec("pcm_s16le");
         audio.setBitRate(bitRate);

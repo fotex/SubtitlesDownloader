@@ -118,14 +118,11 @@ public class SubtitleOffsetUpload {
 
                     float duration = lastSubtitleTime - firstSubtitleTime;
 
-                    System.out.println("duration = " + duration);
-
                     movieConverter.convertToWav(movie, firstSubtitleTime, duration);
-                } catch (EncoderException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (IOException | EncoderException e) {
                     e.printStackTrace();
                 }
+
                 Platform.runLater(() -> {
 
                     customProgressBar.stop();

@@ -15,10 +15,14 @@ public class SettingsManagerTest {
         String language = "English";
         String extension = "srt";
         String extended = "false";
+        String firstSubtitleId = "1";
+        String numberOfSubtitles = "15";
 
-        SettingsManager.getInstance().saveSettings(language, extension, extended, "1", "10");
+        SettingsManager.getInstance().saveSettings(language, extension, extended, firstSubtitleId, numberOfSubtitles);
 
         assertEquals(true, SettingsManager.getInstance().getProperty("language").equals("eng"));
         assertEquals(true, SettingsManager.getInstance().getProperty("extension").equals(extension));
+        assertEquals(true, SettingsManager.getInstance().getProperty("offset_firstsubid").equals(firstSubtitleId));
+        assertEquals(true, SettingsManager.getInstance().getProperty("offset_subtitlesnumber").equals("15"));
     }
 }

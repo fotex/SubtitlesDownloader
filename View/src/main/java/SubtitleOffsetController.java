@@ -131,7 +131,6 @@ public class SubtitleOffsetController implements Initializable {
         leftShiftButton.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("test");
                 mediaPlayer.seek(Duration.millis(mediaPlayer.getCurrentTime().toMillis() - 1000));
             }
         });
@@ -144,7 +143,6 @@ public class SubtitleOffsetController implements Initializable {
         rightShiftButton.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("test");
                 mediaPlayer.seek(Duration.millis(mediaPlayer.getCurrentTime().toMillis() + 1000));
             }
         });
@@ -167,8 +165,6 @@ public class SubtitleOffsetController implements Initializable {
                 SrtSubtitlesSyncer srtSubtitlesSyncer = new SrtSubtitlesSyncer(srtManager.getSubtitlePath());
 
                 float offset = subtitleOffsetCells.getOffset() / 1000f;
-
-                System.out.println(offset);
 
                 try {
                     srtSubtitlesSyncer.offset(offset);

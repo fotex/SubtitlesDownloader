@@ -64,10 +64,6 @@ public class SubtitleOffsetCells {
             double startTime = srtManager.getSubtitleStartTime(i) - firstSubtitleTime;
             double endTime = srtManager.getSubtitleEndTime(i) - firstSubtitleTime;
 
-            if (i == 0) {
-                System.out.println(startTime);
-            }
-
             if (value.toMillis() >= startTime && value.toMillis() <= endTime) {
                 text.setText(srtManager.getSubtitleText(i));
                 found = true;
@@ -130,7 +126,6 @@ public class SubtitleOffsetCells {
                     srtManager.shiftSubtitle(i, msOffset);
                 }
 
-                System.out.println(srtManager.getSubtitleStartTime(0));
                 mediaPlayer.play();
                 totalOffset += msOffset;
                 msOffset = 0;
