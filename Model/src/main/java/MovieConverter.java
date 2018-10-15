@@ -9,7 +9,6 @@ public class MovieConverter {
     private int samplingRate = 44100;
     private int bitRate = 128000;
     private int channels = 2;
-    private int duration = 60;
 
     public MovieConverter() {
 

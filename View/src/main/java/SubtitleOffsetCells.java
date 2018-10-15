@@ -95,7 +95,6 @@ public class SubtitleOffsetCells {
         cell.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                // record a delta distance for the drag and drop operation.
                 for (int i = 0; i < cells.size(); i++) {
                     cellsStartingPosition.add(cells.get(i).getLayoutX());
                 }

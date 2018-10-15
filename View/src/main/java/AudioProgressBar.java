@@ -59,7 +59,6 @@ public class AudioProgressBar {
                     progressLine.setLayoutX(event.getX());
                     mediaPlayer.seek(Duration.millis((event.getX() / maxLine) * mediaPlayer.getMedia().getDuration().toMillis()));
                 }
-
             }
         });
     }
