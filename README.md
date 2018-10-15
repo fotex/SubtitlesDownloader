@@ -77,11 +77,11 @@ e.g. "S01E01.Westworld" is not acceptable.<br><br>
 
 GUI is not responsive yet.
 
-![Blockedsubtitles Image](https://i.imgur.com/6tSAbTs.png)
+![Blockedsubtitles Image](https://i.imgur.com/pdCJftD.png)
 
-![Blockedsubtitles Image](https://i.imgur.com/cCCQqon.png)
+![Blockedsubtitles Image](https://i.imgur.com/SGlbVCV.png)
 
-![Blockedsubtitles Image](https://i.imgur.com/32qVT8Z.png)
+![Blockedsubtitles Image](https://i.imgur.com/tDStJh1.png)
 
 ![Blockedsubtitles Image](https://i.imgur.com/evRETxT.png)
 
