@@ -7,6 +7,10 @@ Download latest release [here](https://github.com/fotex/SubtitlesDownloader/rele
 
 ## Releases
 ```
+Release alpha_1.1.0
+- Changed OSApi to REST
+- Changed design and functionality of the subtitle shifter module.
+  Now user can fit subtitles to movie easly. Movie and subtitle file is required to shift subtitles.
 Release alpha_1.0.8
 - Added option to search extended version of subtitles.
 - Bug fixes.
