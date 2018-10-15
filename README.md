@@ -83,9 +83,9 @@ GUI is not responsive yet.
 
 ![Blockedsubtitles Image](https://i.imgur.com/32qVT8Z.png)
 
-![Blockedsubtitles Image](https://i.imgur.com/nxA0hM4.png)
+![Blockedsubtitles Image](https://i.imgur.com/evRETxT.png)
 
-![Blockedsubtitles Image](https://i.imgur.com/SSUhMIo.png)
+![Blockedsubtitles Image](https://i.imgur.com/N8xQPqp.png)
 
 ## Built with
 
