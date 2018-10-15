@@ -4,7 +4,7 @@ import java.io.File;
 
 public class MovieConverter {
 
-    private final String TEMP_SOUND_DIR = "tmp" + FileManager.separator + "moviesound.mp3";
+    private final String TEMP_SOUND_DIR = "tmp" + FileManager.separator + "moviesound.wav";
 
     private int samplingRate = 44100;
     private int bitRate = 128000;
@@ -15,15 +15,15 @@ public class MovieConverter {
 
     }
 
-    public void convertToMp3(File movie, float offset, float duration) throws EncoderException {
+    public void convertToWav(File movie, float offset, float duration) throws EncoderException {
         AudioAttributes audio = new AudioAttributes();
-        audio.setCodec("libmp3lame");
+        audio.setCodec("pcm_s16le");
         audio.setBitRate(bitRate);
         audio.setSamplingRate(samplingRate);
         audio.setChannels(channels);
 
         EncodingAttributes encodingAttributes = new EncodingAttributes();
-        encodingAttributes.setFormat("mp3");
+        encodingAttributes.setFormat("wav");
         encodingAttributes.setOffset(offset);
         encodingAttributes.setDuration(duration);
         encodingAttributes.setAudioAttributes(audio);

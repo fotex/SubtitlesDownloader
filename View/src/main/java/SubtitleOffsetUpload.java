@@ -120,13 +120,12 @@ public class SubtitleOffsetUpload {
 
                     System.out.println("duration = " + duration);
 
-                    movieConverter.convertToMp3(movie, firstSubtitleTime, duration);
+                    movieConverter.convertToWav(movie, firstSubtitleTime, duration);
                 } catch (EncoderException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 Platform.runLater(() -> {
 
                     customProgressBar.stop();
@@ -134,6 +133,7 @@ public class SubtitleOffsetUpload {
                     if (!convertThreadStopped) {
                         try {
                             SubtitleOffsetController subtitleOffsetController = new SubtitleOffsetController(srtManager);
+
                             FXMLLoader splashLoader = new FXMLLoader(getClass().getResource("subtitleoffset.fxml"));
 
                             splashLoader.setController(subtitleOffsetController);

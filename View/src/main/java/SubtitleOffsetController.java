@@ -38,12 +38,16 @@ public class SubtitleOffsetController implements Initializable {
     private SrtManager srtManager;
     private SubtitleOffsetCells subtitleOffsetCells;
 
+    public SubtitleOffsetController() {
+
+    }
+
     public SubtitleOffsetController(SrtManager srtManager) {
         this.srtManager = srtManager;
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        File movieFile = new File("tmp/moviesound.mp3");
+        File movieFile = new File("tmp" + FileManager.separator + "moviesound.wav");
         String filePath = movieFile.toURI().toString();
         Media media = new Media(filePath);
 
