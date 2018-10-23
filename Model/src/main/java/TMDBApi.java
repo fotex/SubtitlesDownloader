@@ -3,7 +3,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -22,12 +21,7 @@ public class TMDBApi {
     public JsonObject query(String query, boolean isSearchQuery, boolean isTVShow) throws IOException {
 
         URL url;
-
-        if (isSearchQuery) {
-            url = buildSearchUrl(query, isTVShow);
-        } else {
-            url = buildUrl(query, isTVShow);
-        }
+        url = buildUrl(query, isTVShow, isSearchQuery);
 
         URLConnection request = url.openConnection();
         request.connect();
@@ -38,11 +32,12 @@ public class TMDBApi {
         return root.getAsJsonObject();
     }
 
-    private URL buildSearchUrl(String query, boolean isTVShow) {
+    private URL buildUrl(String query, boolean isTVShow, boolean isSearchQuery) {
         StringBuilder urlBuilder = new StringBuilder();
 
         urlBuilder.append(API_URL);
-        urlBuilder.append(SEARCH);
+
+        if(isSearchQuery) { urlBuilder.append(SEARCH); }
 
         if (isTVShow) {
             urlBuilder.append(TVSHOW);
@@ -50,35 +45,19 @@ public class TMDBApi {
             urlBuilder.append(MOVIE);
         }
 
-        urlBuilder.append("?api_key=" + API_KEY);
+        if(isSearchQuery) {
+            urlBuilder.append("?api_key=" + API_KEY);
+        } else {
+            urlBuilder.append("/").append(query);
+            urlBuilder.append("?api_key=" + API_KEY + "&append_to_response=external_ids");
+        }
 
         try {
-            urlBuilder.append("&query=").append(java.net.URLEncoder.encode(query, "UTF-8").replaceAll("\\+", "%20"));
+            if(isSearchQuery) {
+                urlBuilder.append("&query=").append(java.net.URLEncoder.encode(query, "UTF-8").replaceAll("\\+", "%20"));
+            }
             return new URL(urlBuilder.toString());
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    private URL buildUrl(String id, boolean isTVShow) {
-        StringBuilder urlBuilder = new StringBuilder();
-
-        urlBuilder.append(API_URL);
-
-        if (isTVShow) {
-            urlBuilder.append(TVSHOW);
-        } else {
-            urlBuilder.append(MOVIE);
-        }
-
-        urlBuilder.append("/").append(id);
-        urlBuilder.append("?api_key=" + API_KEY + "&append_to_response=external_ids");
-
-        try {
-            return new URL(urlBuilder.toString());
-        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
