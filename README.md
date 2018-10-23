@@ -7,6 +7,10 @@ Download latest release [here](https://github.com/fotex/SubtitlesDownloader/rele
 
 ## Releases
 ```
+Release alpha_1.1.0
+- Changed OSApi to REST
+- Changed design and functionality of the subtitle shifter module.
+  Now user can fit subtitles to movie easly. Movie and subtitle file is required to shift subtitles.
 Release alpha_1.0.8
 - Added option to search extended version of subtitles.
 - Bug fixes.
@@ -73,15 +77,15 @@ e.g. "S01E01.Westworld" is not acceptable.<br><br>
 
 GUI is not responsive yet.
 
-![Blockedsubtitles Image](https://i.imgur.com/6tSAbTs.png)
+![Blockedsubtitles Image](https://i.imgur.com/pdCJftD.png)
 
-![Blockedsubtitles Image](https://i.imgur.com/cCCQqon.png)
+![Blockedsubtitles Image](https://i.imgur.com/SGlbVCV.png)
 
-![Blockedsubtitles Image](https://i.imgur.com/32qVT8Z.png)
+![Blockedsubtitles Image](https://i.imgur.com/tDStJh1.png)
 
-![Blockedsubtitles Image](https://i.imgur.com/nxA0hM4.png)
+![Blockedsubtitles Image](https://i.imgur.com/evRETxT.png)
 
-![Blockedsubtitles Image](https://i.imgur.com/SSUhMIo.png)
+![Blockedsubtitles Image](https://i.imgur.com/N8xQPqp.png)
 
 ## Built with
 
