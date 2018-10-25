@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 public class SettingsController {
 
     @FXML
-    private ComboBox selectBox_language, selectBox_extension;
+    private ComboBox<String> selectBox_language, selectBox_extension;
 
     @FXML
     private CheckBox checkBox_extended;
